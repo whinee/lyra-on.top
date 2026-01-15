@@ -1,0 +1,56 @@
+{
+    "python.terminal.activateEnvironment": false,
+    "python.defaultInterpreterPath": "./pyenv/bin/python",
+    "python.languageServer": "Pylance",
+    "python.linting.pylintEnabled": false,
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportMissingModuleSource": "none"
+    },
+    "cSpell.ignorePaths": [
+        "package-lock.json",
+        "node_modules",
+        "vscode-extension",
+        ".git/objects",
+        ".vscode",
+        ".vscode-insiders",
+        "tmp/**",
+        "**/req.txt",
+        "**/requirements.txt",
+    ],
+    "files.watcherExclude": {
+        // false
+        "**/__pycache__/**": false,
+        "**/*.egg-info/**": false,
+        ".history/**": false,
+        ".mypy_cache/**": false,
+        "node_modules/**": false,
+        "venv/**": false,
+        "pyenv/**": false,
+        "tmp/**": false
+    },
+    "files.exclude": {
+        // false
+        "**/.git*": false,
+        // true
+        "**/__pycache__": true,
+        "**/*.egg-info/": true,
+        ".history": true,
+        ".mypy_cache": true,
+        ".ruff_cache": true,
+        "node_modules": true,
+        "venv": true,
+        "pyenv": true
+    },
+    "search.exclude": {
+        "**/dist": true,
+        "**/node_modules": true,
+        "**/pyenv": true,
+        "**/tmp": true,
+    },
+    "python.analysis.extraPaths": [
+        "",
+        "/home/whine/.vscode/extensions/joedevivo.vscode-circuitpython-0.1.20-linux-x64/stubs",
+        "/home/whine/.config/Code/User/globalStorage/joedevivo.vscode-circuitpython/bundle/20240109/adafruit-circuitpython-bundle-py-20240109/lib"
+    ],
+    "circuitpython.board.version": null,
+}
