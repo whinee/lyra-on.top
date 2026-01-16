@@ -473,6 +473,9 @@ http:
                 '3':
                     spec: Fucking
                     spec_link: https://github.com/joho/7XX-rfc/blob/master/7xx.md#fucking
+                '4':
+                    spec: Reserved for meritocracy related bullshit
+                    spec_link: https://github.com/joho/7XX-rfc/blob/master/7xx.md#reserved-for-meritocracy-related-bullshit
                 '5':
                     spec: Syntax Errors
                     spec_link: https://github.com/joho/7XX-rfc/blob/master/7xx.md#syntax-errors

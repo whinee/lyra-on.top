@@ -1,10 +1,12 @@
-from typing import Any, Optional
+from typing import Any
 
 from fastapi import Request
 from fastapi.responses import UJSONResponse
+from pydantic import BaseModel
 from starlette.templating import Jinja2Templates
 
-from globals import CONSTANTS_YML
+from src.api.config.constants import STRINGS
+from src.api.models.strings import HTTPGroupString
 
 # Constants
 STATUS_KEY_PRIORITY = ["phrase", "description", "spec", "spec_link"]
@@ -39,58 +41,90 @@ TEMPLATES = Jinja2Templates(directory="src/api/templates")
 TEMPLATES.env.globals["fetch_flash"] = fetch_flash
 
 
+HTTPStrings = STRINGS.http
+HTTPCodeStrings = HTTPStrings.code
+HTTPGroupStrings = HTTPStrings.group
+
+def normalize_http_status(code: int) -> int:
+    group = code // 100
+    if group == 1:
+        return 200
+    if group == 7:
+        return 500
+    return code
+
+def extract_prioritized(
+    source: BaseModel,
+    keys: list[str],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    picked: dict[str, Any] = {}
+    rest = source.model_dump()
+
+    for key in keys:
+        value = rest.pop(key, None)
+        if value is not None:
+            picked[key] = value
+
+    return picked, rest
+
+def build_status_meta(status_code: int) -> dict[str, Any]:
+    code_group = str(status_code // 100)
+    code_key = str(status_code)
+
+    code_info = HTTPCodeStrings.get(code_key, None)
+    if code_info is None:
+        return {"code": status_code}
+
+    ci, remaining_code_info = extract_prioritized(code_info, STATUS_KEY_PRIORITY)
+
+    group_info = HTTPGroupStrings.get(code_group, HTTPGroupString(phrase="", description="", spec="", spec_link=""))
+    gi, remaining_group = extract_prioritized(group_info, STATUS_KEY_PRIORITY)
+
+    subgroup = group_info.subgroup
+    if isinstance(subgroup, dict):
+        sg = subgroup.get(code_key[1])
+        if sg:
+            gi["subgroup"] = sg
+
+    return {
+        "code": status_code,
+        **ci,
+        **remaining_code_info,
+        "group": {
+            **gi,
+            **remaining_group,
+        },
+    }
+
+
 class CustomResponse:
     @staticmethod
-    def pretty_json(  # noqa: C901 # type: ignore[no-untyped-def]
+    def raw_json(
         status_code: int,
         detail: str | None = None,
         message: str | None = None,
         error: bool | None = None,
-    ):
-        code_group = int(str(status_code)[0])
+    ) -> tuple[int, dict[str, Any], dict[str, Any]]:
+
+        code_group = status_code // 100
 
         if error is None:
             error = DEFAULT_ERROR.get(code_group, False)
 
-        if rci := CONSTANTS_YML.dir(f"http/code/{status_code}", None):
-            rci = rci.copy()
-            ci = {}
-            for i in STATUS_KEY_PRIORITY:
-                if (rcip := rci.pop(i, "U2VDckV0")) and (rcip != "U2VDckV0"):
-                    ci[i] = rcip
-
-            gi = {}
-            rgi = CONSTANTS_YML.dir(f"http/group/{code_group}").copy()
-            for i in STATUS_KEY_PRIORITY:
-                if (rgip := rgi.pop(i, "U2VDckV0")) and (rgip != "U2VDckV0"):
-                    gi[i] = rgip
-            if (rgis := rgi.pop("subgroup", "U2VDckV0")) and (rgis != "U2VDckV0"):
-                rgis = rgis.copy()
-                if (rgisc := rgis.pop(str(status_code)[1], "U2VDckV0")) and (
-                    rgisc != "U2VDckV0"
-                ):
-                    gi["subgroup"] = rgisc
-
-            status = {"code": status_code, **ci, **rci, "group": {**gi, **rgi}}
-        else:
-            status = {"code": status_code}
-
-        if code_group == 1:
-            status_code = 200
-        elif code_group == 7:
-            status_code = 500
+        status = build_status_meta(status_code)
+        status_code = normalize_http_status(status_code)
 
         content: dict[str, Any] = {}
 
-        if detail := (detail or DEFAULT_DETAILS.get(code_group, None)):
+        if detail or (detail := DEFAULT_DETAILS.get(code_group)):
             content["detail"] = detail
 
-        if message := (message or DEFAULT_MESSAGE.get(code_group, None)):
+        if message or (message := DEFAULT_MESSAGE.get(code_group)):
             content["message"] = message
 
-        content["error"] = DEFAULT_ERROR.get(code_group, False) if error is None else error
+        content["error"] = error
 
-        return [status_code, content, status]
+        return status_code, content, status
 
     @staticmethod
     def json(  # type: ignore[no-untyped-def]
@@ -105,12 +139,12 @@ class CustomResponse:
         if json is None:
             json = {}
 
-        status_code, content, status = CustomResponse.pretty_json(
+        status_code, content, status = CustomResponse.raw_json(
             status_code,
             detail,
             message,
             error,
-        ).copy()
+        )
 
         return UJSONResponse(  # type: ignore[misc]
             *args,

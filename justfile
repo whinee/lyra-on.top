@@ -49,5 +49,5 @@ run:
     ENV=development hypercorn main:app --reload --bind 0.0.0.0:8000 --workers 16
 
 # Run web app in a lightweight way
-run_local:
+dev:
     ENV=development hypercorn main:app --reload --bind 0.0.0.0:8000 --workers 1
