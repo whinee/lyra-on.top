@@ -1,0 +1,95 @@
+/* stylesheets/fx.css - Sparkles, floaters, dividers, scroll-pop reveals (W1-FX)
+   JS-optional: Content fully visible if JS disabled.
+   Zero animation when prefers-reduced-motion is active.
+*/
+
+/* 1. Cute Section Dividers */
+.section-divider {
+  width: 100%;
+  max-width: 600px;
+  margin: var(--space-xl) auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  color: var(--periwinkle);
+  font-size: var(--text-sm);
+  user-select: none;
+}
+
+.divider-line {
+  flex: 1;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--periwinkle),
+    var(--periwinkle) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+}
+
+.divider-icon {
+  color: var(--hot-pink);
+  font-size: var(--text-base);
+}
+
+/* 2. Scroll-Pop Reveal (Progressive Enhancement) */
+html.js-enhanced .scroll-pop {
+  opacity: 0;
+  transform: translateY(24px) scale(0.98);
+  transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+html.js-enhanced .scroll-pop.is-revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* 3. Floater Sparkles & Hearts */
+.fx-floater {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  user-select: none;
+  animation: fx-float-up 1.6s ease-out forwards;
+}
+
+@keyframes fx-float-up {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(0.6) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-80px) scale(1.2) rotate(20deg);
+  }
+}
+
+/* 4. Ambient Sparkles */
+.sparkle-twinkle {
+  display: inline-block;
+  animation: sparkle-pulse 2s ease-in-out infinite;
+  color: var(--baby-yellow);
+}
+
+@keyframes sparkle-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+/* 5. Reduced-Motion Non-Negotiable Override */
+@media (prefers-reduced-motion: reduce) {
+  html.js-enhanced .scroll-pop {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .fx-floater {
+    display: none !important;
+  }
+  .sparkle-twinkle {
+    animation: none !important;
+  }
+}
