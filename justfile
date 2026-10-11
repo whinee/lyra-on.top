@@ -26,9 +26,25 @@ todos:
 todos-strict:
     uv run python scripts/check_todos.py --strict
 
+# Generate slides QR code
+qr:
+    uv run python scripts/make_qr.py
+
 # Freeze static site to dist/
 freeze:
     uv run python scripts/freeze.py
+
+# Serve frozen dist/ directory locally
+preview port="8080": freeze
+    python3 -m http.server {{port}} --directory dist
+
+# Capture 360px and 1280px screenshots of hero variants
+screenshots:
+    uv run python scripts/screenshot_heroes.py
+
+# Deploy static dist/ to Cloudflare Pages
+deploy: freeze
+    npx wrangler pages deploy dist --project-name=lyra-on-top
 
 # Lint codebase
 lint:
