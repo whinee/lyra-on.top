@@ -51,3 +51,30 @@ def test_no_empty_links_or_buttons():
     for href, text in links:
         stripped_text = re.sub(r"<[^>]+>", "", text).strip()
         assert len(stripped_text) > 0 or "aria-label=" in text, f"Empty link found: {href}"
+
+
+def test_heading_hierarchy():
+    response = client.get("/")
+    assert response.status_code == 200
+    html = response.text
+
+    # Exactly one h1 on page
+    h1_matches = re.findall(r"<h1[^>]*>(.*?)</h1>", html, re.DOTALL)
+    assert len(h1_matches) == 1, f"Expected 1 h1, found {len(h1_matches)}"
+    assert "Lyra" in h1_matches[0]
+
+    # h2 tags for all major sections
+    h2_matches = re.findall(r"<h2[^>]*>(.*?)</h2>", html, re.DOTALL)
+    assert len(h2_matches) >= 4, f"Expected at least 4 section h2 headings, found {len(h2_matches)}"
+
+
+def test_prefers_reduced_motion_in_stylesheets():
+    from pathlib import Path
+
+    repo_root = Path(__file__).resolve().parent.parent
+    base_css = (repo_root / "src" / "api" / "static" / "stylesheets" / "base.css").read_text()
+    fx_css = (repo_root / "src" / "api" / "static" / "stylesheets" / "fx.css").read_text()
+
+    assert "prefers-reduced-motion" in base_css
+    assert "prefers-reduced-motion" in fx_css
+
