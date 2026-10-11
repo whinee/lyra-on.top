@@ -1,4 +1,8 @@
----
+# site_info:
+#     title: Lyra-on.top!
+#     author: Lyra Phasma
+#     description: Lyra staying on top of things :3
+
 http:
     code:
         '100':

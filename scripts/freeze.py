@@ -16,6 +16,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
 from main import app  # noqa: E402
+from scripts.make_qr import generate_qr  # noqa: E402
 
 DIST_DIR = REPO_ROOT / "dist"
 STATIC_SRC = REPO_ROOT / "src" / "api" / "static"
@@ -50,6 +51,10 @@ def copy_static_assets() -> bool:
         print(f"Error: Static directory not found: {STATIC_SRC}", file=sys.stderr)
         return False
     shutil.copytree(STATIC_SRC, STATIC_DEST, dirs_exist_ok=True)
+    if (STATIC_SRC / "robots.txt").exists():
+        shutil.copy2(STATIC_SRC / "robots.txt", DIST_DIR / "robots.txt")
+    if (STATIC_SRC / "sitemap.xml").exists():
+        shutil.copy2(STATIC_SRC / "sitemap.xml", DIST_DIR / "sitemap.xml")
     return True
 
 
@@ -67,6 +72,7 @@ def verify_dist() -> bool:
 
 def main() -> int:
     print(f"Freezing site into {DIST_DIR}...")
+    generate_qr()
     if DIST_DIR.exists():
         shutil.rmtree(DIST_DIR)
     DIST_DIR.mkdir(parents=True, exist_ok=True)

@@ -68,4 +68,4 @@ jobs:
             python -m pip install --upgrade pip
             python -m pip install poetry
             python -m poetry install --with dev
-            ENV=development hypercorn main:app --reload --bind 0.0.0.0:8000 --workers 4
+            ENV=development hypercorn main:app --reload --bind 0.0.0.0:8000 --workers 16

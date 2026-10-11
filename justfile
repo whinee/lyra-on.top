@@ -38,9 +38,10 @@ lint:
 test:
     uv run pytest tests
 
-# Run comprehensive validation (contrast, todos, lint, freeze)
+# Run comprehensive validation (contrast, todos, lint, test, freeze)
 check:
     just contrast
     just todos
     just lint
+    just test
     just freeze
