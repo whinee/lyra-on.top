@@ -1,0 +1,121 @@
+<link rel="stylesheet" href="/static/stylesheets/hero_a.css">
+
+<!-- Hero Variant A: Sticker-Sheet / Maximalist (W1-HERO-A) -->
+<section id="hero" class="hero-section hero-a" aria-labelledby="hero-a-title">
+    <div class="container hero-container">
+        <!-- Maximalist Decorative Background Sparkles -->
+        <div class="hero-bg-sparkles" aria-hidden="true">
+            <span class="hero-sparkle-star star-tl">✧</span>
+            <span class="hero-sparkle-star star-tr">✦</span>
+            <span class="hero-sparkle-star star-bl">★</span>
+            <span class="hero-sparkle-star star-br">✧</span>
+        </div>
+
+        <div class="hero-grid">
+            <!-- Content Column: Badges, Title, Tagline, CTAs -->
+            <div class="hero-col-content">
+                <!-- Sticker Pill Cluster -->
+                <div class="hero-pill-cluster">
+                    <span class="hero-sticker sticker-pronouns" aria-label="Pronouns: {{ content.hero.pronouns }}">
+                        <span class="sticker-dot" aria-hidden="true">•</span> {{ content.hero.pronouns }}
+                    </span>
+                    <span class="hero-sticker sticker-neko" aria-label="Neko persona">
+                        neko dev <span class="sticker-kaomoji" aria-hidden="true">:3</span>
+                    </span>
+                    {% if content.hero.location and content.hero.location != "TODO(lyra)" %}
+                    <span class="hero-sticker sticker-location">
+                        {{ content.hero.location }}
+                    </span>
+                    {% endif %}
+                    <span class="hero-sticker sticker-status" aria-label="Status: open to roles">
+                        <span class="status-pulse" aria-hidden="true"></span> open to roles ✧
+                    </span>
+                </div>
+
+                <!-- Main Hero Headline -->
+                <div class="hero-title-wrap">
+                    <h1 id="hero-a-title" class="hero-title">
+                        <span class="hero-name-highlight">{{ content.hero.name }}</span>
+                        <span class="hero-title-kaomoji" aria-hidden="true">{{ content.hero.kaomoji }}</span>
+                    </h1>
+                </div>
+
+                <!-- Tagline Sticker Card -->
+                <div class="hero-tagline-card sticker">
+                    <p class="hero-tagline">{{ content.hero.tagline }}</p>
+                </div>
+
+                <!-- Subtag Sticker Pill -->
+                <div class="hero-subtag-card sticker">
+                    <p class="hero-subtag text-secondary">{{ content.hero.subtag }}</p>
+                </div>
+
+                <!-- 2 CTAs (Talk Slides + Hire Me) -->
+                <div class="hero-actions" aria-label="Hero action buttons">
+                    <a href="{{ content.hero.cta_slides.href }}" class="btn btn-primary hero-btn hero-btn-slides sticker">
+                        <span class="btn-icon" aria-hidden="true">✧</span>
+                        <span class="btn-label">{{ content.hero.cta_slides.label }}</span>
+                    </a>
+                    <a href="{{ content.hero.cta_hire.href }}" class="btn btn-secondary hero-btn hero-btn-hire sticker">
+                        <span class="btn-icon" aria-hidden="true">♡</span>
+                        <span class="btn-label">{{ content.hero.cta_hire.label }}</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Art Column: Sticker Sheet Showcase (Doodle + Sidekick Slot + Floating Stickers) -->
+            <div class="hero-col-art">
+                <div class="hero-sheet-canvas">
+                    <!-- Decorative Corner Tapes -->
+                    <div class="sheet-tape sheet-tape-tl" aria-hidden="true"></div>
+                    <div class="sheet-tape sheet-tape-tr" aria-hidden="true"></div>
+
+                    <!-- Doodle Card (Asset Slot System with Graceful Fallback) -->
+                    {% set doodle_slot = get_slot('artist_doodle') if (content.slots and content.slots.artist_doodle and content.slots.artist_doodle.src) else get_slot('hero_doodle') %}
+                    <div class="hero-doodle-frame sticker" aria-label="Heroine illustration">
+                        <div class="doodle-frame-inner">
+                            <img src="{{ doodle_slot.src }}" alt="{{ doodle_slot.alt }}" width="340" height="340" class="hero-doodle-img" loading="eager" decoding="async">
+                            <div class="doodle-caption sticker" aria-hidden="true">
+                                <span class="doodle-caption-text">Heroine: Lyra</span>
+                                <span class="doodle-caption-sparkle">✧</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidekick Slot (WhiskerFrame Cyberdeck) -->
+                    <div class="hero-sidekick-slot" id="hero-sidekick-slot" aria-label="WhiskerFrame sidekick slot">
+                        {% include "partials/whisker.html" ignore missing %}
+                        <aside class="hero-sidekick-card sticker" aria-label="WhiskerFrame cyberdeck sidekick">
+                            <div class="sidekick-header">
+                                <span class="sidekick-icon" aria-hidden="true">(=^･ω･^=)</span>
+                                <span class="sidekick-tag">Sidekick</span>
+                            </div>
+                            <div class="sidekick-body">
+                                <strong class="sidekick-name">WhiskerFrame</strong>
+                                <span class="sidekick-desc text-secondary">Cyberdeck co-pilot ✧</span>
+                                <div class="sidekick-cli" aria-hidden="true">
+                                    <span class="cli-prompt">uwu&gt;</span>
+                                    <span class="cli-text">sidekick ready :3</span>
+                                    <span class="cli-cursor">_</span>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+
+                    <!-- Floating Maximalist Sticker Accents -->
+                    <div class="hero-floating-stickers" aria-hidden="true">
+                        <span class="floating-sticker sticker-foss sticker">
+                            <span>REVEL in FOSS! ✧</span>
+                        </span>
+                        <span class="floating-sticker sticker-deck sticker">
+                            <span>✦ cyberdeck</span>
+                        </span>
+                        <span class="floating-sticker sticker-nyan sticker">
+                            <span>&gt;w&lt;</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
