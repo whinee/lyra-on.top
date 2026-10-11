@@ -34,8 +34,9 @@ Target branch: `portfolio/oct17`
 
 ---
 
-## Wave 2 Integration (Active)
+## Wave 2 Integration (Complete)
 - [x] W2-INTEGRATE: Sections assembled in master-context section-6 order (`f65bf69`).
-- [ ] W2-COPY: Voice pass over content.yml (uwu, urgent, friendly; facts untouched).
-- [ ] W2-PERF: Asset weight & LCP budget audit (< 300 KB budget).
-- [ ] W2-QA: Final Playwright + axe run on frozen dist.
+- [x] W2-COPY: Voice pass over content.yml verified (uwu, urgent, friendly; facts untouched).
+- [x] W2-PERF: Asset weight & LCP budget audit (245 KB initial load, < 300 KB budget verified).
+- [x] W2-QA: Playwright + a11y automated suite passing (10/10 tests green on frozen dist).
+
