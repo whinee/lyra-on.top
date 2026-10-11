@@ -1,0 +1,12 @@
+<!-- Footer - Section 7 -->
+<footer class="site-footer container">
+    <div class="footer-inner">
+        <p class="credits">{{ content.footer.credits }}</p>
+        {% if content.footer.artist_name != "TODO(lyra)" %}
+            <p class="artist-credit text-secondary">
+                Art by <a href="{{ content.footer.artist_url }}" target="_blank" rel="noopener">{{ content.footer.artist_name }}</a>
+            </p>
+        {% endif %}
+        <p><a href="{{ content.footer.source_url }}" target="_blank" rel="noopener">source on github</a></p>
+    </div>
+</footer>

@@ -1,0 +1,15 @@
+<!-- Hire me section - Section 6 -->
+<section id="hire" class="hire-section container" aria-labelledby="hire-title">
+    <div class="card">
+        <h2 id="hire-title">{{ content.hire.title }}</h2>
+        <p class="subtitle text-secondary">{{ content.hire.subtitle }}</p>
+
+        <div class="hire-cta-box">
+            {% if content.hire.email != "TODO(lyra)" %}
+                <a href="mailto:{{ content.hire.email }}" class="btn btn-primary">{{ content.hire.cta_label }}</a>
+            {% else %}
+                <a href="https://github.com/whinee" class="btn btn-primary" target="_blank" rel="noopener">{{ content.hire.cta_label }}</a>
+            {% endif %}
+        </div>
+    </div>
+</section>

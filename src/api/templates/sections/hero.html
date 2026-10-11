@@ -1,0 +1,17 @@
+<!-- Hero section - Section 1 -->
+<section id="hero" class="hero-section container" aria-labelledby="hero-title">
+    <div class="hero-content">
+        <h1 id="hero-title">{{ content.hero.name }} <span class="kaomoji">{{ content.hero.kaomoji }}</span></h1>
+        <p class="tagline">{{ content.hero.tagline }}</p>
+        <p class="subtag text-secondary">{{ content.hero.subtag }}</p>
+
+        <div class="hero-actions">
+            <a href="{{ content.hero.cta_slides.href }}" class="btn btn-primary">{{ content.hero.cta_slides.label }}</a>
+            <a href="{{ content.hero.cta_hire.href }}" class="btn btn-secondary">{{ content.hero.cta_hire.label }}</a>
+        </div>
+    </div>
+    <div class="hero-art-slot">
+        {% set slot = get_slot('hero_doodle') %}
+        <img src="{{ slot.src }}" alt="{{ slot.alt }}" width="320" height="320" class="hero-doodle">
+    </div>
+</section>

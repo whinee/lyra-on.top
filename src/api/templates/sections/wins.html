@@ -1,0 +1,15 @@
+<!-- Wins section - Section 5 -->
+<section id="wins" class="wins-section container" aria-labelledby="wins-title">
+    <div class="card">
+        <h2 id="wins-title">✧ {{ content.wins.title }}</h2>
+        <div class="wins-list">
+            {% for item in content.wins['items'] %}
+                <article class="win-item">
+                    <h3>{{ item.name }}</h3>
+                    <p class="win-meta text-secondary">Organized by {{ item.organizer }} • <strong>{{ item.award }}</strong></p>
+                    <p>{{ item.description }}</p>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>

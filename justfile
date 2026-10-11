@@ -1,53 +1,46 @@
-# regex to match recipe names and their comments:
-# ^    (?P<recipe>\S+)(?P<args>(?:\s[^#\s]+)*)(?:\s+# (?P<docs>.+))*
-
 # Choose recipes
 default:
     @ just -lu
 
-[private]
-nio_dev:
-    @ python -m no_implicit_optional dev; exit 0
-
-[private]
-nio_src:
-    @ python -m no_implicit_optional src; exit 0
-
-[private]
-ruff:
-    @ python -m ruff check src --fix; exit 0
-
 # Set up development environment
-[unix]
 bootstrap:
-    #!/usr/bin/env bash
-    rm -rf .venv
-    rm -f uv.lock
-    uv venv
-    source .venv/bin/activate
     uv sync
 
-# Set up development environment
-[windows]
-bootstrap:
-    Remove-Item -Recurse -Force .venv
-    Remove-Item -Force uv.lock
-    uv venv
-    . .\.venv\Scripts\Activate.ps1
-    uv sync
+# Run web app in lightweight dev mode
+dev:
+    ENV=development uv run hypercorn main:app --reload --bind 127.0.0.1:8000 --workers 1
+
+# Run web app with multiple workers
+run:
+    ENV=development uv run hypercorn main:app --reload --bind 0.0.0.0:8000 --workers 4
+
+# Check contrast ratios
+contrast:
+    uv run python scripts/check_contrast.py
+
+# Check TODO(lyra) markers
+todos:
+    uv run python scripts/check_todos.py
+
+# Strict check TODO(lyra) markers (fails if any found)
+todos-strict:
+    uv run python scripts/check_todos.py --strict
+
+# Freeze static site to dist/
+freeze:
+    uv run python scripts/freeze.py
 
 # Lint codebase
 lint:
-    just nio_dev
-    just nio_src
-    python -m mdformat docs
-    python -m black -q .
-    just ruff
+    uv run ruff check .
 
-# Run web app
-run:
-    ENV=development hypercorn main:app --reload --bind 0.0.0.0:8000 --workers 16
+# Run test suite
+test:
+    uv run pytest tests
 
-# Run web app in a lightweight way
-dev:
-    ENV=development hypercorn main:app --reload --bind 0.0.0.0:8000 --workers 1
+# Run comprehensive validation (contrast, todos, lint, freeze)
+check:
+    just contrast
+    just todos
+    just lint
+    just freeze
