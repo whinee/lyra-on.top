@@ -1,11 +1,48 @@
 {% extends "base.html" %}
 
+{% block styles %}
+    <link rel="stylesheet" href="/static/stylesheets/hero_a.css">
+    <link rel="stylesheet" href="/static/stylesheets/slides.css">
+    <link rel="stylesheet" href="/static/stylesheets/story.css">
+    <link rel="stylesheet" href="/static/stylesheets/foss.css">
+    <link rel="stylesheet" href="/static/stylesheets/wins.css">
+    <link rel="stylesheet" href="/static/stylesheets/hire.css">
+    <link rel="stylesheet" href="/static/stylesheets/footer.css">
+    <link rel="stylesheet" href="/static/stylesheets/whisker.css">
+    <link rel="stylesheet" href="/static/stylesheets/fx.css">
+{% endblock %}
+
 {% block content %}
-    {% include "sections/hero.html" %}
+    {% include "sections/hero_a.html" %}
+    <div class="section-divider" aria-hidden="true">
+        <span class="divider-line"></span>
+        <span class="divider-icon">✧</span>
+        <span class="divider-line"></span>
+    </div>
     {% include "sections/slides.html" %}
+    <div class="section-divider" aria-hidden="true">
+        <span class="divider-line"></span>
+        <span class="divider-icon">★</span>
+        <span class="divider-line"></span>
+    </div>
     {% include "sections/story.html" %}
+    <div class="section-divider" aria-hidden="true">
+        <span class="divider-line"></span>
+        <span class="divider-icon">✦</span>
+        <span class="divider-line"></span>
+    </div>
     {% include "sections/foss.html" %}
+    <div class="section-divider" aria-hidden="true">
+        <span class="divider-line"></span>
+        <span class="divider-icon">🏆</span>
+        <span class="divider-line"></span>
+    </div>
     {% include "sections/wins.html" %}
+    <div class="section-divider" aria-hidden="true">
+        <span class="divider-line"></span>
+        <span class="divider-icon">♡</span>
+        <span class="divider-line"></span>
+    </div>
     {% include "sections/hire.html" %}
     {% include "sections/footer.html" %}
 {% endblock %}
