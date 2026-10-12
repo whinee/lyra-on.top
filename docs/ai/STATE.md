@@ -24,11 +24,9 @@ Target branch: `portfolio/oct17`
 
 | ID | Task | Owner | Branch | Status | Commit | Notes |
 |---|---|---|---|---|---|---|
-| **W1-HERO-A** | Hero variant A: maximalist sticker-sheet | worker | `task/w1-hero-a` | merged | `5246ff5` | Winner of Hero Race (Score 30/30). |
-| **W1-HERO-B** | Hero variant B: terminal-in-cute | worker | `task/w1-hero-b` | closed | `1c57716` | Race evaluated (Score 26.5/30). |
-| **W1-HERO-C** | Hero variant C: shoujo-manga panel layout | worker | `task/w1-hero-c` | closed | `baaa269` | Race evaluated (Score 28/30). |
-| **W1-BRAND** | Logo system as SVG, wordmark, doodle asset | worker | `task/w1-brand` | complete | `aa75641` | Doodle in static assets; palette SVG wordmark ready. |
-| **W1-SIDEKICK** | WhiskerFrame mascot inline SVG | worker | `task/w1-sidekick` | merged | `4f89363` | Inline SVG partial, 3 states, <8KB palette colors. |
+| **W1-HERO-RACE** | Hero race variant A/B/C | worker | `task/w1-hero-race` | in_progress | - | Active variant race. |
+| **W1-BRAND** | Logo system as SVG, wordmark, doodle asset | worker | `task/w1-brand` | complete | `gate0` | Doodle, wordmark, favicon, divider, badge generated. |
+| **W1-SIDEKICK** | WhiskerFrame mascot inline SVG | worker | `task/w1-sidekick` | in_progress | - | Inline SVG partial, 3 states, <8KB palette colors. |
 | **W1-CURSOR** | Cat cursor + footer toggle | worker | `task/w1-cursor` | in_progress | - | CSS cursor with image-set() + fallbacks. |
 | **W1-MOTION** | Aurora backdrop, marquee, floaters | worker | `task/w1-motion` | merged | `4bebbda` | Shared rAF loop, reduced-motion safe. |
 | **W1-ENGINE-QA** | Content engine tests & fixtures | worker | `task/w1-engine-qa` | in_progress | - | Fixture tests in `tests/test_content.py`. |
