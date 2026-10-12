@@ -14,6 +14,10 @@ dev:
 run:
     ENV=development uv run hypercorn main:app --reload --bind 0.0.0.0:8000 --workers 4
 
+# Validate site content (models, markdown frontmatter, auto-hide rules)
+validate:
+    uv run python scripts/validate_content.py
+
 # Check contrast ratios
 contrast:
     uv run python scripts/check_contrast.py
@@ -54,8 +58,9 @@ lint:
 test:
     uv run pytest tests
 
-# Run comprehensive validation (contrast, todos, lint, test, freeze)
+# Run comprehensive validation (validate, contrast, todos, lint, test, freeze)
 check:
+    just validate
     just contrast
     just todos
     just lint

@@ -243,3 +243,12 @@ code, pre, kbd {
 .surface-raised { background-color: var(--raised); }
 .surface-blurple { background-color: var(--blurple); color: var(--white); }
 .surface-blurple-hi { background-color: var(--blurple-hi); color: var(--white); }
+
+/* 11. Interaction Rule 1: Image-Lock (Images are not selectable or draggable) */
+img, svg, picture, canvas, video, .sticker, .doodle {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+}
+

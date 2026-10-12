@@ -24,12 +24,14 @@
     <!-- CSS Tokens & Foundation -->
     <link rel="stylesheet" href="/static/stylesheets/tokens.css">
     <link rel="stylesheet" href="/static/stylesheets/base.css">
+    <link rel="stylesheet" href="/static/stylesheets/nav.css">
 
     <!-- Section-specific Stylesheets -->
     {% block styles %}{% endblock %}
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content :3</a>
+    {% include "partials/nav.html" %}
 
     <main id="main-content">
         {% block content %}{% endblock %}

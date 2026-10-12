@@ -13,8 +13,10 @@ from fastapi.staticfiles import StaticFiles
 from starlette.middleware import Middleware
 from starlette.middleware.sessions import SessionMiddleware
 
-from src.api.config.content import get_slot, load_content
+from src.api.config.content import get_slot
+from src.api.config.content_loader import load_all_content
 from src.api.models.settings import settings
+from src.api.routers import pages
 from src.api.utils import TEMPLATES, CustomResponse
 
 description = """
@@ -45,9 +47,12 @@ app = FastAPI(
 )
 
 # Load content and inject global template helpers
-content = load_content()
+catalog = load_all_content()
+content = catalog.to_template_context()
 TEMPLATES.env.globals["content"] = content
 TEMPLATES.env.globals["get_slot"] = lambda slot_name: get_slot(content, slot_name)
+
+app.include_router(pages.router)
 
 
 @app.middleware("http")
