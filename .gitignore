@@ -4,6 +4,7 @@ pyenv/
 **/__pycache__/
 .env
 .mypy_cache/
+docs/ai/reports/**/*.png
 
 # Created by https://www.toptal.com/developers/gitignore/api/node,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,python
