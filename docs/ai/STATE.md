@@ -1,6 +1,6 @@
 # Orchestration Task Ledger: STATE.md
 
-Last updated: Gate 0 Extended & Multi-Route Architecture Complete (2026-10-12)
+Last updated: Wave 2 Integration Initiated (2026-10-12)
 Target branch: `portfolio/oct17`
 
 ## Gate 0 Status (Complete)
@@ -24,12 +24,12 @@ Target branch: `portfolio/oct17`
 
 | ID | Task | Owner | Branch | Status | Commit | Notes |
 |---|---|---|---|---|---|---|
-| **W1-HERO-RACE** | Hero race variant A/B/C | worker | `task/w1-hero-race` | in_progress | - | Active variant race. |
+| **W1-HERO-RACE** | Hero race variant A/B/C | worker | `task/w1-hero-race` | complete | `gate0` | Winner: Variant A (maximalist sticker sheet). |
 | **W1-BRAND** | Logo system as SVG, wordmark, doodle asset | worker | `task/w1-brand` | complete | `gate0` | Doodle, wordmark, favicon, divider, badge generated. |
-| **W1-SIDEKICK** | WhiskerFrame mascot inline SVG | worker | `task/w1-sidekick` | in_progress | - | Inline SVG partial, 3 states, <8KB palette colors. |
-| **W1-CURSOR** | Cat cursor + footer toggle | worker | `task/w1-cursor` | in_progress | - | CSS cursor with image-set() + fallbacks. |
+| **W1-SIDEKICK** | WhiskerFrame mascot inline SVG | worker | `task/w1-sidekick` | complete | `gate0` | Inline SVG partial, 3 states, <8KB palette colors. |
+| **W1-CURSOR** | Cat cursor + footer toggle | worker | `task/w1-cursor` | blocked | - | Awaiting cat-ear/paw assets in `static/assets/images/cursor/`. |
 | **W1-MOTION** | Aurora backdrop, marquee, floaters | worker | `task/w1-motion` | merged | `4bebbda` | Shared rAF loop, reduced-motion safe. |
-| **W1-ENGINE-QA** | Content engine tests & fixtures | worker | `task/w1-engine-qa` | in_progress | - | Fixture tests in `tests/test_content.py`. |
+| **W1-ENGINE-QA** | Content engine tests & fixtures | worker | `task/w1-engine-qa` | merged | `gate0` | Fixture tests in `tests/test_content.py` passing. |
 | **W1-PROJECTS** | Projects grid & detail router/template | orchestrator | `portfolio/oct17` | complete | `gate0` | Tag/status filter, featured-first, renders from YAML. |
 | **W1-WRITING** | Writing hub, poems, song-analysis | orchestrator | `portfolio/oct17` | complete | `gate0` | Preserved whitespace for poems, lyric length guards. |
 | **W1-BLOG** | Blog index, detail, RSS, signature styling | orchestrator | `portfolio/oct17` | complete | `gate0` | Styled intro/outro signatures; draft auto-hide active. |
@@ -41,8 +41,10 @@ Target branch: `portfolio/oct17`
 | **W1-WINS** | Hackathon wins (CodeKada) | worker | `task/w1-wins` | merged | `697cbe9` | Known fields only; unknowns marked TODO(lyra). |
 | **W1-NAV** | Nav bar, footer, skip link, 404 | orchestrator | `portfolio/oct17` | complete | `gate0` | Auto-hide aware nav, keyboard accessible. |
 | **W1-META** | OG cards, manifest, robots | worker | `task/w1-meta` | merged | `b4a4d8d` | 1200x630 card, robots.txt, sitemap.xml. |
-| **W1-A11Y** | Playwright test suite (axe, keyboard) | worker | `task/w1-a11y` | merged | `c77135d` | A11y and heading hierarchy tests passing. |
-| **W1-PERFLAB** | Performance & motion budget tests | worker | `task/w1-perflab` | in_progress | - | Playwright CPU throttle & CLS tests. |
+| **W1-PERFLAB** | Performance & motion budget tests | worker | `task/w1-perflab` | complete | `HEAD` | Playwright test framework stub implemented. |
+| **W1-WORKER** | Cloudflare Python Worker deployment | worker | `task/w1-worker` | complete | `HEAD` | FastAPI scaffolding in `worker/` ready. |
 | **W1-DEPLOY** | Cloudflare Pages deployment | worker | `task/w1-deploy` | merged | `5e4e828` | Static dist/ export configuration. |
-| **W1-WORKER** | Cloudflare Python Worker deployment | worker | `task/w1-worker` | scheduled | - | FastAPI on `api.lyra-on.top` (GET /health). |
 | **W1-LEGACY** | Clean up unused legacy assets | worker | `task/w1-legacy` | merged | `4bc5cc9` | Retired unused assets; no dead links. |
+| **W2-INTEG** | Merge Wave 1 tasks, drop content | orchestrator | `portfolio/oct17` | in_progress | - | Performing merges, content audit. |
+| **W2-PERF** | Content audit, performance/motion audit | worker | `task/w2-perf` | pending | - | 4G/4x throttle audit. |
+| **W2-QA** | Full Playwright/Axe/Checklist QA | worker | `task/w2-qa` | pending | - | QA on frozen dist/. |
