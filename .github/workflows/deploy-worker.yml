@@ -33,6 +33,9 @@ jobs:
           uv sync
 
       - name: Run Quality Checks & Freeze Site
+        uses: extractions/setup-just@v4
+        with:
+          github-token: ${{ secrets.MY_GITHUB_TOKEN }}
         run: |
           just check
 
