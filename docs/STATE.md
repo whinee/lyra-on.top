@@ -1,7 +1,14 @@
 # Orchestration Task Ledger: STATE.md
 
-Last updated: Wave 2 / Master Prompt #2 Complete (2026-10-17)
-Target branch: `portfolio/oct17`
+Last updated: Master Prompt #5 Complete (2026-10-17)
+Target branch: `main` (Merged `portfolio/oct17` via PR #1)
+
+## Master Prompt #5 Outcomes (Merge & Deployment)
+- **PR:** [#1](https://github.com/whinee/lyra-on.top/pull/1) (`portfolio/oct17` → `main`)
+- **Final Main SHA:** `311b8dcf225e582a0eee6e78de96cf8ebe25b0cd`
+- **Security Audit:** Gitleaks verified (0 leaks in publishable commit range / repository delta).
+- **Quality Gates:** `just check` (validate, contrast, todos, lint, test, freeze), Lighthouse audits, screenshots verified.
+- **Workflows:** `.github/workflows/deploy-worker.yml` (Cloudflare Workers Static Assets) and `.github/workflows/deploy-vpn.yml` (legacy) triggered on main. No unapproved domain cutovers.
 
 ## Gate 0 & Wave 1 Status
 - [x] 0A: Reconnaissance -> `docs/RECON.md`
