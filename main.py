@@ -35,7 +35,7 @@ app = FastAPI(
     contact={
         "name": "Lyra Phasma",
         "url": "https://lyra-on.top",
-        "email": "whinyaan@disroot.org",
+        "email": "lyraphasma@gmail.com",
     },
     license_info={
         "name": "MIT",

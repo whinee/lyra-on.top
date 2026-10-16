@@ -20,7 +20,7 @@ dependencies = [
     "segno>=1.6.0",
 ]
 maintainers = [
-    { name = "whinyaan", email = "whinyaan@disroot.org" },
+    { name = "Lyra Phasma", email = "lyraphasma@gmail.com" },
 ]
 keywords = ["utility"]
 classifiers=[
