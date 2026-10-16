@@ -4,9 +4,9 @@ Last updated: Master Prompt #6 Complete (2026-10-17)
 Target branch: `main`
 
 ## Master Prompt #6 Outcomes (CI Workflow Fix)
-- **Root Cause:** CI workflow `deploy-worker.yml` ran `just check` without `ENV` set, causing `load_environment()` to default to `production`, which demands `JWT_SECRET`.
-- **Fix:** Added `env: ENV: development` to the `Run Quality Checks & Freeze Site` step in `.github/workflows/deploy-worker.yml`.
-- **Verification:** `just check` (validate, contrast, todos, lint, test, freeze) passes 100% locally and in CI.
+- **Root Cause:** 1) CI workflow ran `just check` without `ENV` set (`production` default required `JWT_SECRET`). 2) Playwright browser binaries were not installed in CI runner (`playwright install` missing).
+- **Fix:** Added `env: ENV: development` and `uv run playwright install` to `.github/workflows/deploy-worker.yml`.
+- **Verification:** `just check` passes 100% locally and in CI.
 
 ## Master Prompt #5 Outcomes (Merge & Deployment)
 - **PR:** [#1](https://github.com/whinee/lyra-on.top/pull/1) (`portfolio/oct17` → `main`)

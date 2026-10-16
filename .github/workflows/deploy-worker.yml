@@ -31,6 +31,7 @@ jobs:
         run: |
           pip install uv
           uv sync
+          uv run playwright install
 
       - name: Set up just
         uses: extractions/setup-just@v4
