@@ -32,10 +32,12 @@ jobs:
           pip install uv
           uv sync
 
-      - name: Run Quality Checks & Freeze Site
+      - name: Set up just
         uses: extractions/setup-just@v4
         with:
-          github-token: ${{ secrets.MY_GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run Quality Checks & Freeze Site
         run: |
           just check
 
