@@ -1,0 +1,46 @@
+<!-- Hire me section - Section 6 (W1-HIRE) -->
+<section id="hire" class="hire-section container" aria-labelledby="hire-title">
+    <div class="card hire-card">
+        <div class="hire-header">
+            <span class="sticker hire-badge">Ready for Action ✧</span>
+            <h2 id="hire-title" class="hire-heading">{{ content.hire.title }}</h2>
+            <p class="hire-subtitle text-secondary">{{ content.hire.subtitle }}</p>
+        </div>
+
+        <!-- Availability Status Pill -->
+        <div class="hire-status-box" aria-label="Work availability status">
+            <span class="status-indicator" aria-hidden="true"></span>
+            <p class="status-text">
+                {% if content.hire.status_line and content.hire.status_line != "TODO(lyra)" %}
+                    {{ content.hire.status_line }}
+                {% else %}
+                    Open to Python, backend, and security roles &amp; internships! ✧
+                {% endif %}
+            </p>
+        </div>
+
+        <!-- Prominent Contact Action Cluster -->
+        <div class="hire-action-cluster">
+            {% if content.hire.email and content.hire.email != "TODO(lyra)" %}
+                <a href="mailto:{{ content.hire.email }}" class="btn btn-primary hire-btn-primary">
+                    <span class="btn-icon" aria-hidden="true">✉</span>
+                    <span>Email Lyra ({{ content.hire.email }})</span>
+                </a>
+            {% else %}
+                <a href="mailto:whinyaan@disroot.org" class="btn btn-primary hire-btn-primary">
+                    <span class="btn-icon" aria-hidden="true">✉</span>
+                    <span>Send Email (whinyaan@disroot.org) ✧</span>
+                </a>
+            {% endif %}
+
+            <a href="https://github.com/whinee" class="btn btn-secondary hire-btn-github" target="_blank" rel="noopener">
+                <span class="btn-icon" aria-hidden="true">💻</span>
+                <span>GitHub @whinee :3</span>
+            </a>
+        </div>
+
+        <div class="hire-footer-note">
+            <p class="hire-quote">"Always excited to talk about weird hardware, Python internals, and Free Software!"</p>
+        </div>
+    </div>
+</section>

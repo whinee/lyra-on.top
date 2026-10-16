@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/stylesheets/blog.css">
+    <link rel="stylesheet" href="/static/stylesheets/footer.css">
+{% endblock %}
+
+{% block content %}
+<section class="blog-page container" aria-label="Blog">
+    <header class="page-header">
+        <div class="blog-header-row">
+            <h1 class="page-title">Blog <span class="sparkle">✧</span></h1>
+            <a href="/blog/rss.xml" class="rss-link btn btn-secondary btn-sm" aria-label="RSS Feed">
+                RSS Feed 📡
+            </a>
+        </div>
+        <p class="page-subtitle">Rants, experiments, tutorials, and adventures in tech :3</p>
+    </header>
+
+    <div class="blog-posts-list">
+        {% for post in blog %}
+        <article class="blog-post-card sticker-card" id="post-{{ post.slug }}">
+            <header class="post-card-header">
+                <span class="post-date">{{ post.date }}</span>
+                <h2 class="post-title">
+                    <a href="/blog/{{ post.slug }}">{{ post.title }}</a>
+                </h2>
+            </header>
+
+            {% if post.summary %}
+                <p class="post-summary">{{ post.summary }}</p>
+            {% endif %}
+
+            <div class="post-card-footer">
+                <div class="post-tags">
+                    {% for tag in post.tags %}
+                        <span class="tag">#{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                <a href="/blog/{{ post.slug }}" class="btn btn-secondary btn-sm">Read Post →</a>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+{% include "sections/footer.html" %}
+{% endblock %}

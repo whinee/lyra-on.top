@@ -1,0 +1,80 @@
+# content.yml - Single source of truth for site content & copy
+# Edit copy here without touching Jinja templates.
+# Unknowns must remain marked TODO(lyra).
+
+meta:
+  title: "Lyra Phasma | lyra-on.top"
+  description: "Lyra Phasma's portfolio: Software developer, cyberdeck builder, and FOSS advocate! :3"
+  canonical_url: "https://lyra-on.top"
+  og_image: "/static/assets/images/meta/og-card.png"
+
+slots:
+  hero_doodle:
+    src: "/static/assets/images/lyra-doodle-transparent.png"
+    fallback: "/static/assets/images/lyra-doodle-transparent.png"
+    alt: "Lyra's neko doodle: pale lavender line art with cat ears, X hairclip, closed-eye smile, and sparkles"
+  artist_doodle:
+    src: "" # TODO(lyra): Path to incoming artist doodle
+    fallback: "/static/assets/images/lyra-doodle-transparent.png"
+    alt: "Custom illustration of Lyra Phasma"
+
+hero:
+  name: "Lyra Phasma"
+  pronouns: "she/her"
+  kaomoji: ":3"
+  tagline: "Software developer, cyberdeck builder, and FOSS advocate! ✧"
+  subtag: "BSCS student • Pythonista • Cyberdeck tinkerer (=^･ω･^=)"
+  location: "TODO(lyra)" # Default: omit from display
+  cta_slides:
+    label: "Talk Slides ✧"
+    href: "#slides"
+  cta_hire:
+    label: "Hire Me :3"
+    href: "#hire"
+
+slides:
+  event_name: "Hack & Yap Episode II"
+  event_date: "Saturday, 17 Oct 2026"
+  event_venue: "Zero-Ten Park, Makati"
+  talk_title: "Weird, Improvised Exciting Device (named WhiskerFrame), gets you noticed (a Cyberdeck story)"
+  slides_url: "TODO(lyra)" # Link to Google Slides / PDF
+  slides_note: "Slides will be available right before the talk! Check back soon ✧"
+  qr_code_svg: "/static/assets/images/slides-qr.svg"
+
+whiskerframe:
+  title: "Meet WhiskerFrame"
+  subtitle: "The Cyberdeck Sidekick helping Lyra get on top ✧"
+  intro: "A custom portable cyberdeck running in full blurple and pastel glory! Built to explore weird computing and stand out anywhere."
+  story: "WhiskerFrame isn't just hardware—it's Lyra's trusty sidekick. When you build something weird and exciting, people take notice."
+  specs: "TODO(lyra)" # Confirmed build specs, parts, and measurements
+  photos: "TODO(lyra)" # Build photos
+
+foss:
+  slogan: "REBEL against corporate greed. REVEL in Free and Open Source Software!"
+  subtitle: "Proudly built with free software, open standards, and zero proprietary lock-in :3"
+  kaomoji: ">w<"
+
+wins:
+  title: "Hackathon Wins"
+  items:
+    - name: "CodeKada: The Online Hackathon"
+      organizer: "DevKada"
+      award: "Winner"
+      year: "TODO(lyra)"
+      project_name: "TODO(lyra)"
+      team_or_solo: "TODO(lyra)"
+      description: "Won CodeKada hackathon! Details on the project and build coming soon."
+
+hire:
+  title: "Let's Build Something Cool!"
+  subtitle: "Looking for an enthusiastic, fast-learning Python developer? Say hello! :3"
+  status_line: "TODO(lyra)" # e.g. "Available for internships & junior software engineering roles"
+  email: "TODO(lyra)"
+  github: "TODO(lyra)" # handle or URL
+  cta_label: "Say Hello (=^･ω･^=)"
+
+footer:
+  credits: "Made with FastAPI + chaos :3"
+  artist_name: "TODO(lyra)"
+  artist_url: "TODO(lyra)"
+  source_url: "https://github.com/whinee/lyra-on.top"

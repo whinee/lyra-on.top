@@ -1,0 +1,144 @@
+/* stylesheets/wins.css - Hackathon wins section (W1-WINS) */
+
+.wins-section {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+}
+
+.wins-card {
+  border: 3px solid var(--raised);
+  background: var(--surface);
+}
+
+.wins-header {
+  margin-bottom: var(--space-xl);
+}
+
+.wins-badge {
+  align-self: flex-start;
+  margin-bottom: var(--space-xs);
+  color: var(--baby-yellow);
+  border-color: var(--baby-yellow);
+  box-shadow: 3px 3px 0 var(--hot-pink);
+}
+
+.wins-heading {
+  color: var(--pink);
+  margin-bottom: var(--space-2xs);
+}
+
+.wins-intro {
+  margin-bottom: 0;
+  font-size: var(--text-base);
+}
+
+.wins-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .wins-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+}
+
+.win-card {
+  display: block;
+  background-color: var(--raised);
+  border: 3px solid var(--periwinkle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-hot-pink);
+  transform: rotate(-0.5deg);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  position: relative;
+}
+
+.win-card:hover {
+  transform: rotate(0.5deg) scale(1.02);
+  box-shadow: 6px 6px 0 var(--pink);
+}
+
+.win-card-ribbon {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  background-color: var(--pink);
+  color: #191a28; /* High contrast */
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-xs);
+  padding: var(--space-2xs) var(--space-sm);
+  border-radius: var(--radius-pill);
+  box-shadow: 2px 2px 0 var(--bg);
+  margin-bottom: var(--space-sm);
+}
+
+.win-name {
+  color: var(--pink);
+  font-size: var(--text-xl);
+  line-height: 1.25;
+  margin-bottom: var(--space-xs);
+}
+
+.win-organizer {
+  font-size: var(--text-sm);
+  color: var(--lavender);
+  margin-bottom: var(--space-sm);
+}
+
+.win-organizer strong {
+  color: var(--baby-blue);
+}
+
+.win-project-tag {
+  display: inline-flex;
+  gap: var(--space-2xs);
+  background-color: var(--surface);
+  border: 1px solid var(--periwinkle);
+  padding: var(--space-2xs) var(--space-xs);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  margin-bottom: var(--space-sm);
+}
+
+.tag-label {
+  color: var(--lavender);
+}
+
+.tag-val {
+  color: var(--cursor-cyan);
+  font-weight: 700;
+}
+
+.win-desc {
+  color: var(--pink);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  margin-bottom: var(--space-md);
+}
+
+.win-footer-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--baby-yellow);
+  border-top: 1px dashed var(--periwinkle);
+  padding-top: var(--space-xs);
+}
+
+.badge-sparkle {
+  color: var(--cursor-cyan);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .win-card,
+  .win-card:hover {
+    transform: none;
+  }
+}

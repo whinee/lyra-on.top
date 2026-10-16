@@ -1,0 +1,145 @@
+/* stylesheets/hire.css - Hire me & contact section (W1-HIRE) */
+
+.hire-section {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-2xl);
+}
+
+.hire-card {
+  border: 4px solid var(--raised);
+  background: var(--surface);
+  box-shadow: var(--shadow-hot-pink);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hire-header {
+  margin-bottom: var(--space-lg);
+}
+
+.hire-badge {
+  display: inline-block;
+  margin-bottom: var(--space-xs);
+  color: var(--hot-pink);
+  border-color: var(--hot-pink);
+  box-shadow: 3px 3px 0 var(--raised);
+}
+
+.hire-heading {
+  color: var(--pink);
+  margin-bottom: var(--space-2xs);
+}
+
+.hire-subtitle {
+  font-size: var(--text-base);
+  margin-bottom: 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hire-status-box {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background-color: var(--bg);
+  border: 2px dashed var(--cursor-cyan);
+  border-radius: var(--radius-pill);
+  padding: var(--space-2xs) var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--cursor-cyan);
+  box-shadow: 0 0 8px var(--cursor-cyan);
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+.status-text {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--baby-yellow);
+  margin-bottom: 0;
+}
+
+.hire-action-cluster {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--space-xl);
+}
+
+@media (min-width: 600px) {
+  .hire-action-cluster {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+.hire-btn-primary {
+  padding: var(--space-md) var(--space-xl);
+  font-size: var(--text-base);
+  background-color: var(--pink);
+  color: var(--bg);
+  box-shadow: 4px 4px 0 var(--hot-pink);
+}
+
+.hire-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 0 var(--hot-pink);
+}
+
+.hire-btn-github {
+  padding: var(--space-md) var(--space-xl);
+  font-size: var(--text-base);
+  background-color: var(--raised);
+  color: var(--baby-blue);
+  border: 2px solid var(--baby-blue);
+  box-shadow: 4px 4px 0 var(--periwinkle);
+}
+
+.hire-btn-github:hover {
+  transform: translateY(-2px);
+  color: var(--baby-yellow);
+  box-shadow: 6px 6px 0 var(--periwinkle);
+}
+
+.btn-icon {
+  font-size: var(--text-lg);
+}
+
+.hire-footer-note {
+  border-top: 1px dashed var(--periwinkle);
+  padding-top: var(--space-md);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hire-quote {
+  font-style: italic;
+  font-size: var(--text-sm);
+  color: var(--lavender);
+  margin-bottom: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-indicator {
+    animation: none;
+  }
+  .hire-btn-primary:hover,
+  .hire-btn-github:hover {
+    transform: none;
+  }
+}

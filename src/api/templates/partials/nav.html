@@ -1,0 +1,16 @@
+<!-- Navigation Partial (Auto-Hide Aware) -->
+<header class="site-nav-header container" aria-label="Main navigation">
+    <div class="nav-inner">
+        <a href="/" class="nav-brand" aria-label="Lyra's home">
+            <span class="brand-sparkle">✧</span>
+            <span class="brand-text">lyra-on.top</span>
+            <span class="brand-kaomoji">:3</span>
+        </a>
+
+        <nav class="nav-links" id="primary-navigation">
+            {% for item in content.active_nav %}
+                <a href="{{ item.href }}" class="nav-link">{{ item.label }}</a>
+            {% endfor %}
+        </nav>
+    </div>
+</header>

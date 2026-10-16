@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/stylesheets/writing.css">
+    <link rel="stylesheet" href="/static/stylesheets/footer.css">
+{% endblock %}
+
+{% block content %}
+<section class="collection-page container" aria-label="{{ title }}">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/writing">← Back to Writing Hub :3</a>
+    </nav>
+
+    <header class="page-header">
+        <h1 class="page-title">{{ title }} <span class="sparkle">✧</span></h1>
+        <p class="page-subtitle">{{ description }}</p>
+    </header>
+
+    <div class="posts-list">
+        {% for item in items %}
+        <article class="post-summary-card sticker-card">
+            <header class="post-card-header">
+                <span class="post-date">{{ item.date }}</span>
+                <h2 class="post-card-title">
+                    <a href="{{ base_url }}/{{ item.slug }}">{{ item.title }}</a>
+                </h2>
+            </header>
+
+            {% if item.summary %}
+                <p class="post-summary-text">{{ item.summary }}</p>
+            {% endif %}
+
+            {% if item.tags %}
+            <div class="post-tags">
+                {% for tag in item.tags %}
+                    <span class="tag">#{{ tag }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+{% include "sections/footer.html" %}
+{% endblock %}

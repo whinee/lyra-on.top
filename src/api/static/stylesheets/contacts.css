@@ -1,0 +1,70 @@
+/* contacts.css - Styles for contacts page & interactive widgets */
+.contacts-page {
+  padding: 3rem 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.contacts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.75rem;
+}
+
+.contact-card {
+  background: var(--surface, #1a1329);
+  border: 2px solid var(--border, #352a52);
+  border-radius: var(--radius-lg, 16px);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 4px 4px 0 var(--border, #352a52);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 0 var(--blurple, #8f7ae6);
+}
+
+.contact-icon {
+  font-size: 2.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.contact-method {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text, #fbf5ff);
+  margin-bottom: 0.5rem;
+}
+
+.contact-desc {
+  font-size: 0.95rem;
+  color: var(--text-dim, #c9b8e8);
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.discord-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.discord-handle {
+  font-family: var(--font-mono, monospace);
+  background: var(--raised, #241c38);
+  color: var(--lavender, #d3bbfb);
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-sm, 6px);
+  border: 1px solid var(--border, #352a52);
+  font-size: 0.9rem;
+}
+
+.obfuscated-email {
+  font-family: var(--font-mono, monospace);
+  color: var(--lavender, #d3bbfb);
+}

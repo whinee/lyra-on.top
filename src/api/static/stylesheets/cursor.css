@@ -1,0 +1,29 @@
+/* cursor.css - Cat cursor implementation with prominent visibility and native fallbacks */
+body {
+    cursor: url('/static/assets/images/cursor/cat-ear-arrow-64.png') 2 2, url('/static/assets/images/cursor/cat-ear-arrow-32.png') 2 2, auto;
+}
+
+/* Interactive elements use prominent cat-paw pointer cursor */
+a, button, [role="button"], input[type="submit"], input[type="button"], .btn, .sticker, .win-card {
+    cursor: url('/static/assets/images/cursor/paw-64.png') 16 16, url('/static/assets/images/cursor/paw-32.png') 16 16, pointer;
+}
+
+/* Explicit text input I-beam preservation */
+input[type="text"], input[type="email"], input[type="search"], input[type="password"], textarea, [contenteditable="true"] {
+    cursor: text !important;
+}
+
+/* Non-draggable, non-selectable images and SVGs (prevents native ghost-drag) */
+img, svg {
+    -webkit-user-drag: none;
+    user-drag: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Touch and coarse pointer fallback */
+@media (pointer: coarse) {
+    body, a, button, [role="button"], .btn, .sticker, .win-card {
+        cursor: auto;
+    }
+}

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/stylesheets/contacts.css">
+    <link rel="stylesheet" href="/static/stylesheets/footer.css">
+{% endblock %}
+
+{% block content %}
+<section class="contacts-page container" aria-label="Contact Lyra">
+    <header class="page-header">
+        <h1 class="page-title">Say Hello <span class="kaomoji">(=^･ω･^=)</span></h1>
+        <p class="page-subtitle">Want to collaborate, talk weird hardware, or chat about FOSS? Reach out! :3</p>
+    </header>
+
+    <div class="contacts-grid">
+        <!-- Email (Obfuscated against scrapers) -->
+        <article class="contact-card sticker-card">
+            <div class="contact-icon">💌</div>
+            <h2 class="contact-method">Email</h2>
+            <p class="contact-desc">Best for formal inquiries, job opportunities, and project ideas.</p>
+            <div class="email-container" id="email-box">
+                {% set email_parts = site.email.address.split('@') %}
+                {% set email_user = email_parts[0] %}
+                {% set email_domain = email_parts[1] if email_parts|length > 1 else '' %}
+                <noscript>
+                    <span class="obfuscated-email">{{ email_user }} [at] {{ email_domain }}</span>
+                </noscript>
+                <a href="#" class="email-link btn btn-primary btn-sm" id="assembled-email" data-user="{{ email_user }}" data-domain="{{ email_domain }}">
+                    Reveal Email :3
+                </a>
+            </div>
+        </article>
+
+        <!-- GitHub -->
+        <article class="contact-card sticker-card">
+            <div class="contact-icon">🐙</div>
+            <h2 class="contact-method">GitHub</h2>
+            <p class="contact-desc">Follow my commits, open-source repos, and dotfiles.</p>
+            <a href="https://github.com/whinee" class="btn btn-secondary btn-sm" target="_blank" rel="noopener">
+                github.com/whinee ↗
+            </a>
+        </article>
+
+        <!-- Discord -->
+        <article class="contact-card sticker-card">
+            <div class="contact-icon">💬</div>
+            <h2 class="contact-method">Discord</h2>
+            <p class="contact-desc">Catch me hanging out in hacker spaces and chat rooms.</p>
+            <div class="discord-box">
+                <span class="discord-handle" id="discord-tag">whinyaan</span>
+                <button class="btn btn-secondary btn-sm" onclick="navigator.clipboard.writeText('whinyaan'); this.textContent = 'Copied! :3';">
+                    Copy Tag
+                </button>
+            </div>
+        </article>
+    </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const emailLink = document.getElementById("assembled-email");
+    if (emailLink) {
+        const u = emailLink.getAttribute("data-user");
+        const d = emailLink.getAttribute("data-domain");
+        if (u && d) {
+            const addr = u + "@" + d;
+            emailLink.addEventListener("click", function(e) {
+                e.preventDefault();
+                emailLink.setAttribute("href", "mailto:" + addr);
+                emailLink.textContent = addr;
+            });
+        }
+    }
+});
+</script>
+
+{% include "sections/footer.html" %}
+{% endblock %}

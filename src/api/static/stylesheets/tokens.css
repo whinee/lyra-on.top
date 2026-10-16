@@ -1,0 +1,69 @@
+/* tokens.css - lyra-on.top visual contract
+   Exact tokens from Master Context section 4
+   Do NOT modify colors or values without orchestrator sign-off.
+*/
+
+:root {
+  /* surfaces (blurple world) */
+  --bg:         #191a28; /* base page */
+  --surface:    #232540; /* cards */
+  --raised:     #2f3257; /* hover / stickers */
+  --blurple:    #3b3fa8; /* big color blocks */
+  --blurple-hi: #5b5fe0; /* DECORATION + white text only */
+
+  /* foreground */
+  --pink:       #fd7da6; /* primary text and headlines */
+  --lavender:   #ae89ff; /* secondary text */
+  --baby-blue:  #75beff; /* links, tags */
+  --baby-yellow:#fff3a8; /* sparkles, highlights */
+
+  /* accents from the palette */
+  --hot-pink:   #ff6dd6;
+  --periwinkle: #8c9aff;
+  --cursor-cyan:#29dbff; /* blinking cursor, focus rings */
+  --white:      #ffffff;
+
+  /* typography fonts */
+  --font-display: 'Fredoka', 'Nunito', system-ui, -apple-system, sans-serif;
+  --font-body:    'Nunito', system-ui, -apple-system, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+
+  /* type scale */
+  --text-xs:   0.75rem;    /* 12px */
+  --text-sm:   0.875rem;   /* 14px */
+  --text-base: 1rem;       /* 16px */
+  --text-lg:   1.25rem;    /* 20px */
+  --text-xl:   1.5rem;     /* 24px */
+  --text-2xl:  2rem;       /* 32px */
+  --text-3xl:  2.5rem;     /* 40px */
+  --text-4xl:  3.25rem;    /* 52px */
+
+  /* spacing scale */
+  --space-2xs: 0.25rem;  /* 4px */
+  --space-xs:  0.5rem;   /* 8px */
+  --space-sm:  0.75rem;  /* 12px */
+  --space-md:  1rem;     /* 16px */
+  --space-lg:  1.5rem;   /* 24px */
+  --space-xl:  2rem;     /* 32px */
+  --space-2xl: 3rem;     /* 48px */
+  --space-3xl: 4.5rem;   /* 72px */
+
+  /* radii */
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-xl:   28px;
+  --radius-pill: 9999px;
+
+  /* hard-shadow utilities */
+  --shadow-pink:     4px 4px 0 var(--pink);
+  --shadow-hot-pink: 6px 6px 0 var(--hot-pink);
+  --shadow-blue:     4px 4px 0 var(--baby-blue);
+  --shadow-cyan:     4px 4px 0 var(--cursor-cyan);
+  --shadow-surface:  4px 4px 0 var(--surface);
+  --shadow-raised:   6px 6px 0 var(--raised);
+
+  /* transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+}

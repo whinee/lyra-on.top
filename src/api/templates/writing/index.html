@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/stylesheets/writing.css">
+    <link rel="stylesheet" href="/static/stylesheets/footer.css">
+{% endblock %}
+
+{% block content %}
+<section class="writing-page container" aria-label="Writing Hub">
+    <header class="page-header">
+        <h1 class="page-title">Writing <span class="sparkle">✧</span></h1>
+        <p class="page-subtitle">Essays, poems, song analyses, and late-night tech musings :3</p>
+    </header>
+
+    <div class="writing-collections-grid">
+        {% if has_blog %}
+        <article class="collection-card sticker-card">
+            <h2 class="collection-title"><a href="/blog">Blog ✧</a></h2>
+            <p class="collection-desc">Longer thoughts on tech, self-hosting, FOSS, and cyberspace.</p>
+            <div class="collection-count">{{ blog|length }} posts</div>
+            <a href="/blog" class="btn btn-secondary btn-sm">Read Blog →</a>
+        </article>
+        {% endif %}
+
+        {% if has_poems %}
+        <article class="collection-card sticker-card">
+            <h2 class="collection-title"><a href="/writing/poems">Poems ✧</a></h2>
+            <p class="collection-desc">Heartfelt stanzas written under neon glow and terminal screens.</p>
+            <div class="collection-count">{{ poems|length }} poems</div>
+            <a href="/writing/poems" class="btn btn-secondary btn-sm">Read Poems →</a>
+        </article>
+        {% endif %}
+
+        {% if has_song_analysis %}
+        <article class="collection-card sticker-card">
+            <h2 class="collection-title"><a href="/writing/song-analysis">Song Analysis ✧</a></h2>
+            <p class="collection-desc">Dissecting music, lyrics, and emotional resonance line by line.</p>
+            <div class="collection-count">{{ song_analysis|length }} analyses</div>
+            <a href="/writing/song-analysis" class="btn btn-secondary btn-sm">Explore Analyses →</a>
+        </article>
+        {% endif %}
+    </div>
+</section>
+
+{% include "sections/footer.html" %}
+{% endblock %}

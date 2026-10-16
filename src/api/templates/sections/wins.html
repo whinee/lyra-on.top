@@ -1,0 +1,45 @@
+<!-- Wins section - Section 5 (W1-WINS) -->
+<section id="wins" class="wins-section container" aria-labelledby="wins-title">
+    <div class="card wins-card">
+        <div class="wins-header">
+            <span class="sticker wins-badge">Trophy Case ✧</span>
+            <h2 id="wins-title" class="wins-heading">{{ content.wins.title }}</h2>
+            <p class="wins-intro text-secondary">Hackathons, build sprints, and tech challenges conquered!</p>
+        </div>
+
+        <div class="wins-grid">
+            {% for item in content.wins['items'] %}
+                <article class="win-card sticker" aria-labelledby="win-title-{{ loop.index }}">
+                    <div class="win-card-ribbon">
+                        <span class="ribbon-icon" aria-hidden="true">🏆</span>
+                        <span class="ribbon-text">{{ item.award }}</span>
+                    </div>
+
+                    <div class="win-body">
+                        <h3 id="win-title-{{ loop.index }}" class="win-name">{{ item.name }}</h3>
+                        <p class="win-organizer text-secondary">
+                            <span>Organized by <strong>{{ item.organizer }}</strong></span>
+                            {% if item.year and item.year != "TODO(lyra)" %}
+                                <span class="win-year">• {{ item.year }}</span>
+                            {% endif %}
+                        </p>
+
+                        {% if item.project_name and item.project_name != "TODO(lyra)" %}
+                            <div class="win-project-tag">
+                                <span class="tag-label">Project:</span>
+                                <span class="tag-val">{{ item.project_name }}</span>
+                            </div>
+                        {% endif %}
+
+                        <p class="win-desc">{{ item.description }}</p>
+
+                        <div class="win-footer-badge">
+                            <span class="badge-sparkle">★</span>
+                            <span class="badge-label">Verified Hackathon Victory :3</span>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>

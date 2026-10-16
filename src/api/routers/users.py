@@ -24,8 +24,7 @@ async def register(user: UserReg, response: Response):
             details="E-mail Error",
             message="E-mail already used. Try again.",
         )
-    else:
-        emails.append(user.email)
+    emails.append(user.email)
 
     if DB.get(user.username):
         response.status_code = 400

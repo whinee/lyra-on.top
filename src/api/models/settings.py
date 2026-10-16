@@ -25,11 +25,14 @@ class Settings(BaseModel):
 
 def load_settings() -> Settings:
     env = load_environment()
+    default_secret = "dev-secret-not-for-production" if env != "production" else None
+    jwt_secret = optional("JWT_SECRET", default_secret) or require("JWT_SECRET")
+    webhook_secret = optional("WEBHOOK_SECRET", default_secret) or optional("JWT_SECRET", default_secret) or "dev-webhook-secret"
 
     return Settings(
         ENV=env,
-        JWT_SECRET=require("JWT_SECRET"),
-        WEBHOOK_SECRET=require("JWT_SECRET"),
+        JWT_SECRET=jwt_secret,
+        WEBHOOK_SECRET=webhook_secret,
         DEBUG=optional("DEBUG", "false").lower() == "true",
         STRINGS=STRINGS,
     )

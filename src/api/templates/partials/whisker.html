@@ -1,0 +1,140 @@
+<!-- templates/partials/whisker.html - WhiskerFrame mascot inline SVG component (< 8 KB) -->
+<div class="whisker-mascot-wrapper" id="whisker-mascot" data-state="idle" aria-label="WhiskerFrame, Lyra's cyberdeck sidekick mascot">
+    <!-- Interactive Speech Bubble -->
+    <div class="whisker-speech-bubble" id="whisker-speech" role="status" aria-live="polite">
+        <span class="whisker-speech-text" id="whisker-speech-text">WhiskerFrame booted! :3</span>
+        <span class="whisker-speech-tail" aria-hidden="true"></span>
+    </div>
+
+    <!-- WhiskerFrame Cyberdeck Inline SVG -->
+    <svg class="whisker-svg" viewBox="0 0 200 180" width="200" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cute cyberdeck with cat ears, blinking cursor eyes, and whiskers">
+        <!-- Drop Shadow Filter for Stickers -->
+        <defs>
+            <filter id="whisker-shadow" x="-10%" y="-10%" width="125%" height="125%">
+                <feDropShadow dx="3" dy="3" stdDeviation="0" flood-color="#ff6dd6" />
+            </filter>
+        </defs>
+
+        <g class="whisker-body-group" filter="url(#whisker-shadow)">
+            <!-- Cat Ears on Chassis -->
+            <!-- Left Ear -->
+            <polygon class="ear-outer" points="40,55 25,18 62,35" fill="#2f3257" stroke="#fd7da6" stroke-width="3" stroke-linejoin="round"/>
+            <polygon class="ear-inner" points="42,50 32,26 56,38" fill="#fd7da6" />
+
+            <!-- Right Ear -->
+            <polygon class="ear-outer" points="160,55 175,18 138,35" fill="#2f3257" stroke="#fd7da6" stroke-width="3" stroke-linejoin="round"/>
+            <polygon class="ear-inner" points="158,50 168,26 144,38" fill="#fd7da6" />
+
+            <!-- Cyberdeck Antenna / Handle -->
+            <path d="M 85,30 Q 100,15 115,30" fill="none" stroke="#75beff" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="100" cy="18" r="4" fill="#fff3a8"/>
+
+            <!-- Main Chassis (Screen Unit) -->
+            <rect class="chassis-screen" x="30" y="32" width="140" height="90" rx="14" fill="#232540" stroke="#fd7da6" stroke-width="4"/>
+
+            <!-- Screen Bezel -->
+            <rect class="screen-bezel" x="42" y="42" width="116" height="70" rx="8" fill="#191a28" stroke="#3b3fa8" stroke-width="2"/>
+
+            <!-- Whiskers (Left) -->
+            <line class="whisker-line" x1="16" y1="65" x2="38" y2="70" stroke="#fd7da6" stroke-width="3" stroke-linecap="round"/>
+            <line class="whisker-line" x1="14" y1="80" x2="38" y2="78" stroke="#fd7da6" stroke-width="3" stroke-linecap="round"/>
+
+            <!-- Whiskers (Right) -->
+            <line class="whisker-line" x1="162" y1="70" x2="184" y2="65" stroke="#fd7da6" stroke-width="3" stroke-linecap="round"/>
+            <line class="whisker-line" x1="162" y1="78" x2="186" y2="80" stroke="#fd7da6" stroke-width="3" stroke-linecap="round"/>
+
+            <!-- Blinking Terminal Eyes / Cursor Eyes -->
+            <!-- Left Eye (Cursor) -->
+            <g class="whisker-eye left-eye">
+                <rect class="eye-cursor" x="60" y="66" width="16" height="6" rx="2" fill="#29dbff"/>
+                <rect class="eye-open" x="62" y="60" width="12" height="14" rx="4" fill="#29dbff"/>
+            </g>
+
+            <!-- Cute Nose / Prompt -->
+            <polygon points="100,76 96,72 104,72" fill="#fd7da6"/>
+
+            <!-- Mouth :3 -->
+            <path d="M 94,80 Q 97,84 100,81 Q 103,84 106,80" fill="none" stroke="#ae89ff" stroke-width="2" stroke-linecap="round"/>
+
+            <!-- Right Eye (Cursor) -->
+            <g class="whisker-eye right-eye">
+                <rect class="eye-cursor" x="124" y="66" width="16" height="6" rx="2" fill="#29dbff"/>
+                <rect class="eye-open" x="126" y="60" width="12" height="14" rx="4" fill="#29dbff"/>
+            </g>
+
+            <!-- Rosy Cheeks -->
+            <circle cx="54" cy="85" r="5" fill="#ff6dd6" opacity="0.6"/>
+            <circle cx="146" cy="85" r="5" fill="#ff6dd6" opacity="0.6"/>
+
+            <!-- Cyberdeck Keyboard Base (Perspective Wedge) -->
+            <polygon points="20,150 180,150 166,122 34,122" fill="#2f3257" stroke="#fd7da6" stroke-width="3" stroke-linejoin="round"/>
+
+            <!-- Keyboard Keys Grid -->
+            <!-- Row 1 -->
+            <rect x="42" y="126" width="12" height="6" rx="1" fill="#8c9aff"/>
+            <rect x="58" y="126" width="12" height="6" rx="1" fill="#8c9aff"/>
+            <rect x="74" y="126" width="12" height="6" rx="1" fill="#8c9aff"/>
+            <rect x="90" y="126" width="20" height="6" rx="1" fill="#75beff"/>
+            <rect x="114" y="126" width="12" height="6" rx="1" fill="#8c9aff"/>
+            <rect x="130" y="126" width="12" height="6" rx="1" fill="#8c9aff"/>
+            <rect x="146" y="126" width="12" height="6" rx="1" fill="#8c9aff"/>
+
+            <!-- Row 2 -->
+            <rect x="38" y="136" width="14" height="7" rx="1" fill="#8c9aff"/>
+            <rect x="56" y="136" width="14" height="7" rx="1" fill="#8c9aff"/>
+            <rect x="74" y="136" width="52" height="7" rx="2" fill="#29dbff"/> <!-- Spacebar -->
+            <rect x="130" y="136" width="14" height="7" rx="1" fill="#8c9aff"/>
+            <rect x="148" y="136" width="14" height="7" rx="1" fill="#fd7da6"/> <!-- Enter Key -->
+
+            <!-- Tiny Decorative Sparkle on Cyberdeck Chassis -->
+            <polygon points="152,48 154,43 156,48 161,50 156,52 154,57 152,52 147,50" fill="#fff3a8"/>
+        </g>
+    </svg>
+</div>
+
+<!-- Fictional Client-Side WhiskerFrame Overdrive Boss Battle Arena -->
+<div id="whisker-boss-arena" class="whisker-boss-arena" aria-hidden="true" role="dialog" aria-modal="true" aria-label="WhiskerFrame Overdrive Boss Battle">
+    <div class="boss-overlay-backdrop" id="boss-backdrop"></div>
+    <div class="boss-content">
+        <header class="boss-header">
+            <div class="boss-title-row">
+                <span class="boss-badge">OVERDRIVE MODE</span>
+                <span id="boss-status-text" class="boss-status-text">CLICK WHISKERFRAME RAPIDLY TO OVERCLOCK! :3</span>
+            </div>
+            <div class="boss-power-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="boss-power-track">
+                <div class="boss-power-fill" id="boss-power-fill" style="width: 0%;"></div>
+            </div>
+            <div class="boss-controls">
+                <button type="button" id="boss-exit-btn" class="btn btn-secondary btn-sm boss-btn-exit" aria-label="Exit boss fight">Exit (Esc)</button>
+            </div>
+        </header>
+
+        <div class="boss-grid">
+            <!-- Left Terminal: Synthetic Kernel & Git Simulation (Fictional strings only) -->
+            <div class="boss-terminal" id="boss-terminal-left">
+                <div class="boss-term-bar">
+                    <span class="boss-term-title">fictional@whisker-sim:~/git</span>
+                </div>
+                <pre class="boss-term-body" id="boss-term-left-body">[SIMULATION ACTIVE] Waiting for clock burst...</pre>
+            </div>
+
+            <!-- Mascot Combat Stage in Center -->
+            <div class="boss-center-stage" id="boss-center-stage">
+                <div class="boss-aura" id="boss-aura"></div>
+                <div id="boss-mascot-dock"></div>
+                <div id="boss-victory-banner" class="boss-victory-banner" style="display: none;">
+                    <h3>★ MAXIMUM OVERDRIVE REACHED! ★</h3>
+                    <p>Monolithic code defeated! WhiskerFrame runs free! ✧ (=^･ω･^=)</p>
+                </div>
+            </div>
+
+            <!-- Right Terminal: Synthetic Telemetry / Mock Wireshark (RFC 5737 Testnet only) -->
+            <div class="boss-terminal" id="boss-terminal-right">
+                <div class="boss-term-bar">
+                    <span class="boss-term-title">telemetry@sim-net:~/audit</span>
+                </div>
+                <pre class="boss-term-body" id="boss-term-right-body">[RFC 5737 TESTNET] Synthetic packets idle...</pre>
+            </div>
+        </div>
+    </div>
+</div>

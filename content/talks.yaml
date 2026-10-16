@@ -1,0 +1,10 @@
+# content/talks.yaml - Speaking appearances & slides
+talks:
+  - slug: "hack-and-yap-whiskerframe"
+    title: "Weird, Improvised Exciting Device (named WhiskerFrame), gets you noticed (a Cyberdeck story)"
+    event: "Hack & Yap Episode II"
+    date: "Saturday, 17 Oct 2026"
+    venue: "Zero-Ten Park, Makati"
+    slides_url: "TODO(lyra)"
+    description: "A talk about building custom cyberdeck hardware, standing out, and having fun with computing."
+    featured: true

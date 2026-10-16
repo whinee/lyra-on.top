@@ -1,0 +1,26 @@
+<!-- Footer - Section 7 (W1-FOOTER) -->
+<footer class="site-footer container" aria-label="Site footer">
+    <div class="footer-card">
+        <div class="footer-top">
+            <span class="footer-brand">lyra-on.top ✧</span>
+            <a href="#main-content" class="back-to-top btn btn-secondary">
+                <span>Top ↑ :3</span>
+            </a>
+        </div>
+
+        <div class="footer-inner">
+            <p class="credits">{{ content.footer.credits }}</p>
+
+            {% if content.footer.artist_name and content.footer.artist_name != "TODO(lyra)" %}
+                <p class="artist-credit text-secondary">
+                    Art by <a href="{{ content.footer.artist_url }}" target="_blank" rel="noopener">{{ content.footer.artist_name }}</a>
+                </p>
+            {% endif %}
+
+            <p class="footer-links">
+                <a href="{{ content.footer.source_url }}" target="_blank" rel="noopener">Source on GitHub</a> •
+                <a href="/404.html">Lost? 404 page :3</a>
+            </p>
+        </div>
+    </div>
+</footer>

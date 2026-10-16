@@ -1,0 +1,110 @@
+<link rel="stylesheet" href="/static/stylesheets/hero_c.css">
+
+<!-- Hero Variant C: Shoujo Manga Panel Layout (W1-HERO-C) -->
+<section id="hero" class="hero-section hero-c" aria-labelledby="hero-c-title">
+    <div class="container hero-c-container">
+        <!-- Shoujo manga sparkles background decoration -->
+        <div class="manga-sparkles-bg" aria-hidden="true">
+            <span class="manga-sparkle sp-1">✧</span>
+            <span class="manga-sparkle sp-2">✦</span>
+            <span class="manga-sparkle sp-3">★</span>
+            <span class="manga-sparkle sp-4">✧</span>
+        </div>
+
+        <div class="manga-page">
+            <!-- Panel 1: Heroine Introduction -->
+            <article class="panel panel-heroine" aria-label="Heroine introduction panel">
+                <div class="manga-speed-lines" aria-hidden="true"></div>
+                <div class="panel-header">
+                    <span class="panel-tag">PANEL 01 // HEROINE</span>
+                    <span class="manga-sfx sfx-kira" aria-hidden="true">✧ KIRA KIRA ✧</span>
+                </div>
+
+                <div class="heroine-grid">
+                    <div class="heroine-art-wrap">
+                        {% set doodle_slot = get_slot('artist_doodle') if (content.slots and content.slots.artist_doodle and content.slots.artist_doodle.src) else get_slot('hero_doodle') %}
+                        <div class="heroine-frame">
+                            <img src="{{ doodle_slot.src }}" alt="{{ doodle_slot.alt }}" width="340" height="340" class="heroine-doodle-img" loading="eager" decoding="async">
+                        </div>
+                    </div>
+
+                    <div class="heroine-bio">
+                        <div class="manga-badge-row">
+                            <span class="manga-badge badge-pronouns">{{ content.hero.pronouns }}</span>
+                            <span class="manga-badge badge-role">neko dev {{ content.hero.kaomoji }}</span>
+                            {% if content.hero.location and content.hero.location != "TODO(lyra)" %}
+                            <span class="manga-badge badge-location">{{ content.hero.location }}</span>
+                            {% endif %}
+                        </div>
+
+                        <h1 id="hero-c-title" class="hero-title hero-c-title">
+                            <span class="hero-name-txt">{{ content.hero.name }}</span>
+                            <span class="hero-kaomoji" aria-hidden="true">{{ content.hero.kaomoji }}</span>
+                        </h1>
+                    </div>
+                </div>
+
+                <!-- Speech bubble with tagline placed below grid for perfect manga flow -->
+                <div class="manga-bubble heroine-bubble" role="note" aria-label="Heroine tagline">
+                    <p class="bubble-text">{{ content.hero.tagline }}</p>
+                </div>
+            </article>
+
+            <!-- Panel 2: Sidekick WhiskerFrame cyberdeck -->
+            <aside class="panel panel-mascot" aria-label="Sidekick WhiskerFrame cyberdeck panel">
+                <div class="panel-header">
+                    <span class="panel-tag">PANEL 02 // SIDEKICK</span>
+                    <span class="manga-sfx sfx-goro" aria-hidden="true">⚡ GORO GORO ⚡</span>
+                </div>
+                <div class="mascot-content">
+                    <div class="hero-mascot-unit">
+                        {% include "partials/whisker.html" ignore missing %}
+                    </div>
+                    <div class="manga-bubble mascot-bubble" role="note" aria-label="Mascot speech bubble">
+                        <p class="bubble-text">*purr* cyberdeck ready :3</p>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Panel 3: Character Dossier / Stats card -->
+            <section class="panel panel-stats" aria-label="Character dossier and stats panel">
+                <div class="panel-header">
+                    <span class="panel-tag">PANEL 03 // DOSSIER</span>
+                    <span class="manga-sfx sfx-lvl" aria-hidden="true">✦ LVL 99 ✦</span>
+                </div>
+                <div class="stats-body">
+                    <div class="dossier-row">
+                        <span class="dossier-label">CLASS:</span>
+                        <span class="dossier-val font-mono">Kittygirl Developer</span>
+                    </div>
+                    <div class="dossier-row">
+                        <span class="dossier-label">SUBTAG:</span>
+                        <span class="dossier-val font-mono">{{ content.hero.subtag }}</span>
+                    </div>
+                    <div class="dossier-row dossier-foss">
+                        <span class="dossier-label">FOSS SLOGAN:</span>
+                        <p class="dossier-slogan font-mono">{% if content.foss and content.foss.slogan %}{{ content.foss.slogan }}{% else %}REBEL against corporate greed. REVEL in Free and Open Source Software!{% endif %}</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Panel 4: Dramatic Action CTA panel -->
+            <footer class="panel panel-action" aria-label="Action buttons panel">
+                <div class="action-banner">
+                    <span class="action-episode-label font-display">NEXT EPISODE ➡</span>
+                    <span class="manga-sfx sfx-action" aria-hidden="true">★ CLIMAX! ★</span>
+                </div>
+                <div class="hero-actions" aria-label="Hero action buttons">
+                    <a href="{{ content.hero.cta_slides.href }}" class="btn btn-manga btn-manga-slides">
+                        <span class="btn-sfx" aria-hidden="true">✧</span>
+                        <span class="btn-label">{{ content.hero.cta_slides.label }}</span>
+                    </a>
+                    <a href="{{ content.hero.cta_hire.href }}" class="btn btn-manga btn-manga-hire">
+                        <span class="btn-sfx" aria-hidden="true">♡</span>
+                        <span class="btn-label">{{ content.hero.cta_hire.label }}</span>
+                    </a>
+                </div>
+            </footer>
+        </div>
+    </div>
+</section>

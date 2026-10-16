@@ -1,0 +1,33 @@
+<!-- Slides section - Section 2 -->
+<section id="slides" class="slides-section container" aria-labelledby="slides-title">
+    <div class="card slides-card">
+        <div class="slides-info">
+            <span class="sticker slides-badge">Hack &amp; Yap Episode II ✧</span>
+            <h2 id="slides-title" class="slides-heading">{{ content.slides.event_name }}</h2>
+            <p class="event-details text-secondary">
+                <span class="detail-item">📅 {{ content.slides.event_date }}</span>
+                <span class="detail-separator">•</span>
+                <span class="detail-item">📍 {{ content.slides.event_venue }}</span>
+            </p>
+            <div class="talk-box">
+                <p class="talk-label">Speaker Talk :3</p>
+                <h3 class="talk-title">{{ content.slides.talk_title }}</h3>
+            </div>
+
+            <div class="slides-cta-block">
+                {% if content.slides.slides_url != "TODO(lyra)" %}
+                    <a href="{{ content.slides.slides_url }}" class="btn btn-primary" target="_blank" rel="noopener">Open Talk Slides ✧</a>
+                {% else %}
+                    <div class="sticker notice-sticker">{{ content.slides.slides_note }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="slides-qr-block" aria-label="QR Code to scan for talk slides">
+            <div class="qr-frame">
+                <img src="{{ content.slides.qr_code_svg }}" alt="QR Code to open talk slides on your phone" width="220" height="220" class="qr-image" loading="lazy">
+                <p class="qr-caption">Scan with your phone! 📱✧</p>
+            </div>
+        </div>
+    </div>
+</section>

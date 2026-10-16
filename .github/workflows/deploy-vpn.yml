@@ -1,0 +1,71 @@
+name: Deploy via VPN and SSH
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    env:
+      OVPN_CFG: ${{ secrets.OVPN_CFG }}
+      OVPN_USERNAME: ${{ secrets.OVPN_USERNAME }}
+      OVPN_PASSWD: ${{ secrets.OVPN_PASSWD }}
+      SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+      SSH_ADDRESS: ${{ secrets.SSH_ADDRESS }}
+      SSH_PASSWD: ${{ secrets.SSH_PASSWD }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install OpenVPN
+        run: |
+          sudo apt-get update
+          sudo apt-get --assume-yes --no-install-recommends install openvpn sshpass
+
+      - name: Set up OpenVPN
+        run: |
+          echo "${OVPN_USERNAME}" > auth.txt
+          echo "${OVPN_PASSWD}" >> auth.txt
+          sudo openvpn --config dev/ovpn-cfg --auth-user-pass auth.txt --daemon
+          sleep 10s
+
+      - name: SSH to remove local copy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.SSH_ADDRESS }}
+          username: ${{ env.SSH_USERNAME }}
+          password: ${{ env.SSH_PASSWD }}
+          script: |
+            rm -rf cheeseberry
+
+      - name: Rsync to server
+        uses: up9cloud/action-rsync@master
+        env:
+          USER: root
+          HOST: 192.168.103.2
+          PASSWORD: ${{ env.SSH_PASSWD }}
+          TARGET: '~/cheeseberry'
+          VERBOSE: true
+          ARGS: '-av --exclude-from=./.gitignore'
+
+      - name: SSH to run web app
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.SSH_ADDRESS }}
+          username: ${{ env.SSH_USERNAME }}
+          password: ${{ env.SSH_PASSWD }}
+          script: |
+            cd cheeseberry
+            rm -rf poetry.lock
+            python3.11 -m venv pyenv
+            source pyenv/bin/activate
+            python -m pip install --upgrade pip
+            python -m pip install poetry
+            python -m poetry install --with dev
+            ENV=development hypercorn main:app --reload --bind 0.0.0.0:8000 --workers 16
