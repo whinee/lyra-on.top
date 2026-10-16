@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/stylesheets/projects.css">
+    <link rel="stylesheet" href="/static/stylesheets/footer.css">
+{% endblock %}
+
+{% block content %}
+<article class="project-detail-page container" aria-label="{{ project.title }}">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/projects">← Back to Projects :3</a>
+    </nav>
+
+    <header class="project-detail-header">
+        <h1 class="page-title">{{ project.title }} <span class="sparkle">✧</span></h1>
+        <p class="project-summary-lead">{{ project.summary }}</p>
+        <div class="project-meta-bar">
+            <span class="project-status">Status: {{ project.status }}</span>
+            {% if project.language %}
+                <span class="project-lang">Language: {{ project.language }}</span>
+            {% endif %}
+            <a href="{{ project.repo_url }}" class="btn btn-secondary btn-sm" target="_blank" rel="noopener">
+                View Source on GitHub ↗
+            </a>
+        </div>
+    </header>
+
+    <div class="project-detail-content markdown-body">
+        {{ body_html | safe }}
+    </div>
+</article>
+
+{% include "sections/footer.html" %}
+{% endblock %}

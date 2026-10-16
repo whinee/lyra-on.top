@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/stylesheets/resume.css">
+    <link rel="stylesheet" href="/static/stylesheets/footer.css">
+{% endblock %}
+
+{% block content %}
+<section class="resume-page container" aria-label="Resume">
+    <header class="resume-header">
+        <h1 class="page-title">Lyra Phasma <span class="sparkle">✧</span></h1>
+        <p class="resume-headline">{{ resume.headline }}</p>
+        <p class="resume-summary">{{ resume.summary }}</p>
+
+        <div class="resume-actions no-print">
+            <button onclick="window.print()" class="btn btn-secondary btn-sm" aria-label="Print resume">
+                Print Resume 🖨️
+            </button>
+            <a href="/contacts" class="btn btn-primary btn-sm">
+                {{ resume.cta }} :3
+            </a>
+        </div>
+    </header>
+
+    <div class="resume-sections">
+        <!-- Skills -->
+        {% if resume.skills %}
+        <section class="resume-section" aria-label="Skills">
+            <h2 class="section-title">Skills & Technologies ✧</h2>
+            <div class="skills-grid">
+                {% for skill in resume.skills %}
+                    <span class="skill-pill">{{ skill }}</span>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Public Achievements Only -->
+        {% set public_achievements = [] %}
+        {% for a in resume.achievements %}
+            {% if a.visibility == "public" %}
+                {% set _ = public_achievements.append(a) %}
+            {% endif %}
+        {% endfor %}
+
+        {% if public_achievements %}
+        <section class="resume-section" aria-label="Achievements">
+            <h2 class="section-title">Selected Achievements 🏆</h2>
+            <ul class="resume-list">
+                {% for a in public_achievements %}
+                <li class="resume-item">
+                    <div class="item-header">
+                        <strong class="item-title">{{ a.title }}</strong>
+                        {% if a.year and a.year != "TODO(lyra)" %}
+                            <span class="item-year">{{ a.year }}</span>
+                        {% endif %}
+                    </div>
+                    {% if a.detail %}
+                        <p class="item-detail">{{ a.detail }}</p>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+
+        <!-- Public Speaking Only -->
+        {% set public_speaking = [] %}
+        {% for s in resume.speaking %}
+            {% if s.visibility == "public" %}
+                {% set _ = public_speaking.append(s) %}
+            {% endif %}
+        {% endfor %}
+
+        {% if public_speaking %}
+        <section class="resume-section" aria-label="Speaking">
+            <h2 class="section-title">Speaking & Talks 🎤</h2>
+            <ul class="resume-list">
+                {% for s in public_speaking %}
+                <li class="resume-item">
+                    <div class="item-header">
+                        <strong class="item-title">{{ s.title }}</strong>
+                        <span class="item-date">{{ s.date }}</span>
+                    </div>
+                    <p class="item-detail">{{ s.event }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+
+        <!-- Public Education Only (default private) -->
+        {% set public_education = [] %}
+        {% for ed in resume.education %}
+            {% if ed.visibility == "public" %}
+                {% set _ = public_education.append(ed) %}
+            {% endif %}
+        {% endfor %}
+
+        {% if public_education %}
+        <section class="resume-section" aria-label="Education">
+            <h2 class="section-title">Education 🎓</h2>
+            <ul class="resume-list">
+                {% for ed in public_education %}
+                <li class="resume-item">
+                    <div class="item-header">
+                        <strong class="item-title">{{ ed.degree }}</strong>
+                        {% if ed.year %}
+                            <span class="item-year">{{ ed.year }}</span>
+                        {% endif %}
+                    </div>
+                    <p class="item-detail">{{ ed.institution }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+
+        <!-- Privacy & Deadname Note -->
+        <aside class="resume-email-note no-print" aria-label="Personal CV Note">
+            <p class="note-text">
+                💌 <em>{{ resume.email_note }}</em>
+            </p>
+        </aside>
+    </div>
+</section>
+
+{% include "sections/footer.html" %}
+{% endblock %}

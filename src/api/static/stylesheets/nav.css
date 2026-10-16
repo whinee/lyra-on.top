@@ -1,0 +1,81 @@
+/* nav.css - Site header & navigation styles */
+.site-nav-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--surface, #1a1329);
+  border-bottom: 2px solid var(--border, #352a52);
+  padding: 0.75rem 1rem;
+  backdrop-filter: blur(8px);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text, #fbf5ff);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+.nav-brand:hover,
+.nav-brand:focus-visible {
+  color: var(--blurple-hi, #ad9bf0);
+  text-decoration: none;
+}
+
+.brand-sparkle {
+  color: var(--blurple-hi, #ad9bf0);
+}
+
+.brand-kaomoji {
+  color: var(--lavender, #d3bbfb);
+  font-size: 0.95em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+
+.nav-link {
+  color: var(--text-dim, #c9b8e8);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm, 6px);
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--text, #fbf5ff);
+  background: var(--raised, #241c38);
+  text-decoration: none;
+}
+
+@media (max-width: 600px) {
+  .nav-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .nav-links {
+    width: 100%;
+    gap: 0.35rem 0.65rem;
+  }
+}

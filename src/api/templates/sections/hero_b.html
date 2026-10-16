@@ -1,0 +1,145 @@
+<link rel="stylesheet" href="/static/stylesheets/hero_b.css">
+
+<!-- Hero Variant B: Terminal-in-Cute (W1-HERO-B) -->
+<section id="hero" class="hero-section hero-b" aria-labelledby="hero-b-title">
+    <div class="container hero-container">
+        <!-- Ambient Terminal Tech Sparkles (Contained within hero composition) -->
+        <div class="hero-bg-sparkles" aria-hidden="true">
+            <span class="hero-sparkle-star star-tl">✧</span>
+            <span class="hero-sparkle-star star-tr">✦</span>
+            <span class="hero-sparkle-star star-bl">01</span>
+            <span class="hero-sparkle-star star-br">✧</span>
+        </div>
+
+        <div class="hero-grid">
+            <!-- Content Column: Terminal Window & CTAs -->
+            <div class="hero-col-content">
+                <div class="hero-terminal-window" role="region" aria-label="Cyberdeck terminal console">
+                    <div class="terminal-header" aria-hidden="true">
+                        <div class="terminal-dots">
+                            <span class="dot dot-close"></span>
+                            <span class="dot dot-min"></span>
+                            <span class="dot dot-max"></span>
+                        </div>
+                        <span class="terminal-title">lyra@whiskerframe:~/cyberdeck</span>
+                        <div class="terminal-meta">
+                            <span class="term-badge">TTY1</span>
+                        </div>
+                    </div>
+
+                    <div class="terminal-screen">
+                        <div class="terminal-body">
+                            <!-- Command 1: whoami -->
+                            <div class="term-block">
+                                <p class="term-cmd">
+                                    <span class="term-prompt">uwu&gt;</span>
+                                    <span class="term-input">whoami</span>
+                                </p>
+                                <div class="term-output">
+                                    <h1 id="hero-b-title" class="hero-title">
+                                        <span class="hero-name">{{ content.hero.name }}</span>
+                                        <span class="hero-kaomoji" aria-hidden="true">{{ content.hero.kaomoji }}</span>
+                                        <span class="term-cursor" aria-hidden="true">_</span>
+                                    </h1>
+                                    <div class="term-meta-row">
+                                        <span class="term-pill term-pill-pronouns" aria-label="Pronouns: {{ content.hero.pronouns }}">
+                                            <span class="pill-dot" aria-hidden="true">•</span> {{ content.hero.pronouns }}
+                                        </span>
+                                        <span class="term-pill term-pill-role">
+                                            neko dev <span class="term-sparkle" aria-hidden="true">✧</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Command 2: cat /etc/tagline -->
+                            <div class="term-block">
+                                <p class="term-cmd">
+                                    <span class="term-prompt">uwu&gt;</span>
+                                    <span class="term-input">cat /etc/tagline</span>
+                                </p>
+                                <div class="term-output">
+                                    <p class="hero-tagline">{{ content.hero.tagline }}</p>
+                                    <p class="hero-subtag">{{ content.hero.subtag }}</p>
+                                </div>
+                            </div>
+
+                            <!-- Command 3: status -->
+                            <div class="term-block">
+                                <p class="term-cmd">
+                                    <span class="term-prompt">uwu&gt;</span>
+                                    <span class="term-input">status</span>
+                                </p>
+                                <div class="term-output term-status-group">
+                                    <p class="term-status-line">
+                                        <span class="term-status-ok">[OK]</span>
+                                        <span class="term-status-text">WhiskerFrame co-pilot online :3</span>
+                                    </p>
+                                    <p class="term-status-line">
+                                        <span class="term-status-ok">[OK]</span>
+                                        <span class="term-status-text">Mode: FOSS or bust! ✧</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terminal-styled Action Buttons -->
+                <div class="hero-actions" aria-label="Hero action buttons">
+                    <a href="{{ content.hero.cta_slides.href }}" class="btn hero-btn hero-btn-slides">
+                        <span class="btn-prompt" aria-hidden="true">&gt;</span>
+                        <span class="btn-icon" aria-hidden="true">✧</span>
+                        <span class="btn-label">{{ content.hero.cta_slides.label }}</span>
+                    </a>
+                    <a href="{{ content.hero.cta_hire.href }}" class="btn hero-btn hero-btn-hire">
+                        <span class="btn-prompt" aria-hidden="true">&gt;</span>
+                        <span class="btn-icon" aria-hidden="true">♡</span>
+                        <span class="btn-label">{{ content.hero.cta_hire.label }}</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Art Column: Cyberdeck Monitor Frame + Whisker Mascot + Co-Pilot Card -->
+            <div class="hero-col-art">
+                <div class="cyberdeck-rig">
+                    <!-- Heroine CRT / Cyberdeck Monitor Frame -->
+                    {% set doodle_slot = get_slot('artist_doodle') if (content.slots and content.slots.artist_doodle and content.slots.artist_doodle.src) else get_slot('hero_doodle') %}
+                    <div class="cyberdeck-monitor" aria-label="Heroine live monitor feed">
+                        <div class="monitor-top-bar" aria-hidden="true">
+                            <span class="monitor-label">MON // FEED: LYRA</span>
+                            <span class="monitor-status">LIVE ✧</span>
+                        </div>
+                        <div class="monitor-screen">
+                            <div class="monitor-telemetry monitor-telemetry-tl" aria-hidden="true">REC [●]</div>
+                            <div class="monitor-telemetry monitor-telemetry-tr" aria-hidden="true">340x340</div>
+                            <img src="{{ doodle_slot.src }}" alt="{{ doodle_slot.alt }}" width="340" height="340" class="hero-doodle-img" loading="eager" decoding="async">
+                            <div class="monitor-telemetry monitor-telemetry-bl" aria-hidden="true">CH-01 // DECK</div>
+                            <div class="monitor-telemetry monitor-telemetry-br" aria-hidden="true">FPS: 60</div>
+                        </div>
+                    </div>
+
+                    <!-- WhiskerFrame Mascot Deck & Co-Pilot Dialogue Card -->
+                    <div class="cyberdeck-sidekick-dock">
+                        <div class="hero-mascot-container">
+                            {% include "partials/whisker.html" ignore missing %}
+                        </div>
+
+                        <aside class="copilot-card" aria-label="WhiskerFrame co-pilot console">
+                            <div class="copilot-header">
+                                <span class="copilot-badge">CO-PILOT</span>
+                                <span class="copilot-telemetry" aria-hidden="true">/dev/ttyUSB0</span>
+                            </div>
+                            <div class="copilot-body">
+                                <p class="copilot-dialogue">
+                                    <span class="copilot-prefix" aria-hidden="true">whisker&gt;</span>
+                                    cyberdeck co-pilot: ready to hack weird hardware! :3
+                                </p>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

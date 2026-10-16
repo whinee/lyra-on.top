@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/stylesheets/projects.css">
+    <link rel="stylesheet" href="/static/stylesheets/footer.css">
+{% endblock %}
+
+{% block content %}
+<section class="projects-page container" aria-label="Projects">
+    <header class="page-header">
+        <h1 class="page-title">Projects <span class="sparkle">✧</span></h1>
+        <p class="page-subtitle">Weird hardware, reliable software, and playful FOSS experiments :3</p>
+    </header>
+
+    <div class="projects-grid">
+        {% for project in projects %}
+        <article class="project-card sticker-card" id="project-{{ project.slug }}">
+            <div class="project-card-header">
+                <h2 class="project-title">
+                    <a href="{{ project.repo_url }}" target="_blank" rel="noopener">{{ project.title }}</a>
+                </h2>
+                {% if project.featured %}
+                    <span class="badge badge-featured">★ Featured</span>
+                {% endif %}
+            </div>
+
+            <p class="project-summary">{{ project.summary }}</p>
+
+            {% if project.highlights %}
+            <ul class="project-highlights">
+                {% for hl in project.highlights %}
+                    <li>{{ hl }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            <div class="project-meta">
+                <div class="project-tags">
+                    {% for tag in project.tags %}
+                        <span class="tag">#{{ tag }}</span>
+                    {% endfor %}
+                </div>
+
+                <div class="project-links">
+                    <a href="{{ project.repo_url }}" class="btn btn-secondary btn-sm" target="_blank" rel="noopener">
+                        GitHub ↗
+                    </a>
+                    {% if project.body %}
+                        <a href="/projects/{{ project.slug }}" class="btn btn-primary btn-sm">
+                            Case Study :3
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+{% include "sections/footer.html" %}
+{% endblock %}

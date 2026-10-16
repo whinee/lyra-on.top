@@ -91,3 +91,50 @@
         </g>
     </svg>
 </div>
+
+<!-- Fictional Client-Side WhiskerFrame Overdrive Boss Battle Arena -->
+<div id="whisker-boss-arena" class="whisker-boss-arena" aria-hidden="true" role="dialog" aria-modal="true" aria-label="WhiskerFrame Overdrive Boss Battle">
+    <div class="boss-overlay-backdrop" id="boss-backdrop"></div>
+    <div class="boss-content">
+        <header class="boss-header">
+            <div class="boss-title-row">
+                <span class="boss-badge">OVERDRIVE MODE</span>
+                <span id="boss-status-text" class="boss-status-text">CLICK WHISKERFRAME RAPIDLY TO OVERCLOCK! :3</span>
+            </div>
+            <div class="boss-power-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="boss-power-track">
+                <div class="boss-power-fill" id="boss-power-fill" style="width: 0%;"></div>
+            </div>
+            <div class="boss-controls">
+                <button type="button" id="boss-exit-btn" class="btn btn-secondary btn-sm boss-btn-exit" aria-label="Exit boss fight">Exit (Esc)</button>
+            </div>
+        </header>
+
+        <div class="boss-grid">
+            <!-- Left Terminal: Synthetic Kernel & Git Simulation (Fictional strings only) -->
+            <div class="boss-terminal" id="boss-terminal-left">
+                <div class="boss-term-bar">
+                    <span class="boss-term-title">fictional@whisker-sim:~/git</span>
+                </div>
+                <pre class="boss-term-body" id="boss-term-left-body">[SIMULATION ACTIVE] Waiting for clock burst...</pre>
+            </div>
+
+            <!-- Mascot Combat Stage in Center -->
+            <div class="boss-center-stage" id="boss-center-stage">
+                <div class="boss-aura" id="boss-aura"></div>
+                <div id="boss-mascot-dock"></div>
+                <div id="boss-victory-banner" class="boss-victory-banner" style="display: none;">
+                    <h3>★ MAXIMUM OVERDRIVE REACHED! ★</h3>
+                    <p>Monolithic code defeated! WhiskerFrame runs free! ✧ (=^･ω･^=)</p>
+                </div>
+            </div>
+
+            <!-- Right Terminal: Synthetic Telemetry / Mock Wireshark (RFC 5737 Testnet only) -->
+            <div class="boss-terminal" id="boss-terminal-right">
+                <div class="boss-term-bar">
+                    <span class="boss-term-title">telemetry@sim-net:~/audit</span>
+                </div>
+                <pre class="boss-term-body" id="boss-term-right-body">[RFC 5737 TESTNET] Synthetic packets idle...</pre>
+            </div>
+        </div>
+    </div>
+</div>

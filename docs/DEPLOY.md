@@ -1,6 +1,6 @@
-# Deployment Guide: Cloudflare Pages (lyra-on.top)
+# Deployment Runbook: Cloudflare Workers Static Assets (`lyra-on.top`)
 
-Static deployment runbook for the lyra-on.top portfolio. Target deadline: Wed 14 Oct 2026 18:00 (Asia/Manila).
+Static deployment runbook for the lyra-on.top portfolio targeting **Cloudflare Workers Static Assets**.
 
 ---
 
@@ -8,80 +8,87 @@ Static deployment runbook for the lyra-on.top portfolio. Target deadline: Wed 14
 
 - **Source:** FastAPI + Jinja2 templates + plain CSS tokens.
 - **Export Pipeline:** `scripts/freeze.py` captures all public routes into `dist/` with zero runtime Python overhead.
-- **Hosting:** Cloudflare Pages (global CDN edge network).
-- **Domain:** `https://lyra-on.top`
+- **Hosting:** Cloudflare Workers Static Assets (edge network).
+- **Domain:** `https://lyra-on.top` (primary static site Worker).
+- **API Worker:** Separate Python API Worker at `api.lyra-on.top` (`worker/main.py`).
 
-**Why static export first:**
-Visitors will scan the talk QR on phone cellular or venue WiFi right after the Hack & Yap talk. Static files have 0ms Python cold starts, zero backend database dependencies, and survive traffic spikes effortlessly.
+**Why Workers Static Assets:**
+Provides lightning-fast global edge delivery, 0ms cold starts, and seamless static asset routing without Pages dependencies.
 
 ---
 
-## 2. Build & Export Steps
+## 2. Local Build & Validation Steps
 
-To build the static distribution locally:
+To build and validate the static distribution locally:
 
 ```bash
-# 1. Install dependencies
+# 1. Install dependencies & uv sync
 uv sync
 
-# 2. Run quality checks & build
+# 2. Run comprehensive checks & static freeze
 just check
 ```
 
-`just check` will:
-1. Validate WCAG 2.1 AA contrast matrix (`scripts/check_contrast.py`)
-2. Audit `TODO(lyra)` markers (`scripts/check_todos.py`)
-3. Lint codebase with ruff (`ruff check .`)
-4. Build SVG QR code (`scripts/make_qr.py`)
-5. Freeze routes into `dist/` (`scripts/freeze.py`)
+`just check` executes:
+1. Validate content and nav (`scripts/validate_content.py`)
+2. WCAG 2.1 AA contrast matrix (`scripts/check_contrast.py`)
+3. `TODO(lyra)` audit (`scripts/check_todos.py`)
+4. Ruff linting (`ruff check .`)
+5. Pytest test suite (`pytest tests`)
+6. Freeze routes into `dist/` (`scripts/freeze.py`)
 
-Output lands in `dist/`:
-- `dist/index.html`
-- `dist/404.html`
-- `dist/robots.txt`
-- `dist/sitemap.xml`
-- `dist/static/` (stylesheets, scripts, images, self-hosted fonts)
-
----
-
-## 3. Deployment Options
-
-### Option A: Cloudflare Wrangler CLI (Direct)
-
+To test the frozen output locally:
 ```bash
-# Deploy to preview / production
-npx wrangler pages deploy dist --project-name=lyra-on-top
+just preview
+```
+Opens http://localhost:8080 serving `dist/`.
+
+To test via Wrangler CLI locally:
+```bash
+npx wrangler dev
 ```
 
-### Option B: Cloudflare Pages Git Integration
+---
 
-1. In Cloudflare Dashboard -> **Workers & Pages** -> **Create application** -> **Pages**.
-2. Connect GitHub repository `whinee/lyra-on.top`.
-3. Configure build settings:
-   - **Framework preset:** None
-   - **Build command:** `pip install uv && uv sync && uv run python scripts/freeze.py`
-   - **Build output directory:** `dist`
-4. Root directory: `/`
+## 3. GitHub Actions CI/CD Pipeline
+
+Automated deployment is defined in `.github/workflows/deploy-worker.yml`.
+- **Trigger:** Pushes to `main` and `workflow_dispatch`.
+- **Security:** Least privilege (`permissions: contents: read`), concurrency protection against overlapping deployments, 10-minute timeout.
+- **Steps:** Checkout → Setup Python 3.13 → Install `uv` & dependencies → Run `just check` → Deploy via `cloudflare/wrangler-action@v3`.
 
 ---
 
-## 4. Custom Domain Checklist: `lyra-on.top`
+## 4. Operator Setup & Secrets Checklist
 
-- [ ] Add custom domain in Cloudflare Pages dashboard: `lyra-on.top` and `www.lyra-on.top`.
-- [ ] Verify DNS records in DNS registrar:
-  - CNAME `lyra-on.top` -> `lyra-on-top.pages.dev` (or Cloudflare proxied apex).
-  - CNAME `www` -> `lyra-on-top.pages.dev`.
-- [ ] SSL/TLS setting: **Full (strict)**.
-- [ ] Verify HTTPS redirect is enforced: HTTP 301 -> HTTPS.
-- [ ] Verify custom 404 page serves `dist/404.html` on missing paths.
+Lyra must configure the following external prerequisites before automated GitHub Actions deployment can succeed.
+
+### Step 1: Cloudflare Account ID & API Token
+1. **Cloudflare Account ID:**
+   - Location: Cloudflare Dashboard sidebar / URL overview.
+   - Value name: `CLOUDFLARE_ACCOUNT_ID`.
+2. **Cloudflare API Token:**
+   - Location: Cloudflare Dashboard → My Profile → API Tokens → Create Token.
+   - Template: Use **Edit Cloudflare Workers** template.
+   - Permissions scope: Account-level Workers Scripts (Edit) and Workers KV / Static Assets as required.
+   - Value name: `CLOUDFLARE_API_TOKEN`.
+
+### Step 2: GitHub Repository Secrets
+1. Navigate to GitHub repository: `whinee/lyra-on.top`
+2. Go to **Settings → Secrets and variables → Actions → New repository secret**.
+3. Add the two secrets:
+   - Name: `CLOUDFLARE_ACCOUNT_ID` | Value: [Your Account ID]
+   - Name: `CLOUDFLARE_API_TOKEN` | Value: [Your API Token]
+
+### Step 3: Production Domain Cutover (`lyra-on.top`)
+- **Warning:** Do not cut over production DNS / routing without explicit operator approval.
+- Initial validation will deploy to `workers.dev` preview or preview deployments. Once verified, custom route mapping for `lyra-on.top` can be enabled in Cloudflare Workers settings.
 
 ---
 
 ## 5. Verification Checklist Post-Deploy
-
+- [ ] GitHub Actions workflow `Deploy Worker Static Assets` passes successfully.
 - [ ] Desktop layout renders at 1280px without horizontal scroll.
 - [ ] Mobile layout renders clean at 360px viewport.
-- [ ] Talk slides QR code scans cleanly from screen using a phone camera.
-- [ ] Mascot (WhiskerFrame) interactive states work with JS on; fallback displays clean with JS off.
-- [ ] Page weight under 300 KB transferred on throttled 4G network.
-- [ ] Zero external network calls (all fonts and scripts self-hosted).
+- [ ] Talk slides QR code scans cleanly.
+- [ ] Zero external network calls.

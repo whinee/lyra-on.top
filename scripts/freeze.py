@@ -3,14 +3,15 @@
 scripts/freeze.py - Static export generator for lyra-on.top.
 
 Enumerates all active routes and collection slugs honoring the Auto-Hide rule,
-renders via FastAPI TestClient into dist/, copies static assets, builds sitemap.xml
-and _redirects, and verifies output for Cloudflare Pages deployment.
+renders via FastAPI TestClient into dist/, copies static assets, builds sitemap.xml,
+_redirects, llms.txt, and llms-full.txt, and verifies output for Cloudflare Pages deployment.
 """
 
 import shutil
 import sys
 from datetime import date
 from pathlib import Path
+from typing import Any
 
 from fastapi.testclient import TestClient
 
@@ -27,7 +28,102 @@ STATIC_SRC = REPO_ROOT / "src" / "api" / "static"
 STATIC_DEST = DIST_DIR / "static"
 
 
-def _collect_content_routes(catalog) -> list[tuple[str, str]]:
+def generate_llms_txt(catalog: Any, base_url: str) -> str:
+    """Generate llms.txt content following llmstxt.org proposal."""
+    llms_txt = f"""# {catalog.site.author_display_name}
+
+> {catalog.site.description}
+
+## Summary
+- Author: {catalog.site.author_display_name}
+- Tagline: {catalog.site.tagline}
+- Site: {base_url}
+- Public Email: {catalog.site.email.address}
+- GitHub: https://github.com/whinee
+
+## Core Pages
+- [{catalog.site.author_display_name} Home]({base_url}/): Main landing page with cyberdeck sidekick WhiskerFrame and hardware stories.
+- [Resume / CV]({base_url}/resume/): Technical skills in Python, FastAPI, Linux, embedded systems, and hackathon wins.
+- [Contact]({base_url}/contacts/): Direct public inquiries and collaboration channels.
+"""
+    if catalog.has_projects:
+        llms_txt += f"\n## Projects\n- [Projects Index]({base_url}/projects/): Open-source hardware and software engineering builds.\n"
+        for p in catalog.public_projects:
+            llms_txt += f"- [{p.title}]({base_url}/projects/{p.slug}/): {p.summary}\n"
+
+    if catalog.has_talks:
+        llms_txt += f"\n## Talks\n- [Talks & Presentations]({base_url}/talks/): Technical presentations on weird computing and cyberdecks.\n"
+        for t in catalog.public_talks:
+            llms_txt += f"- [{t.title}]({base_url}/talks/): {t.description}\n"
+    return llms_txt
+
+
+def generate_llms_full(catalog: Any, base_url: str) -> str:
+    """Generate llms-full.txt content as extended companion document."""
+    llms_full = f"""# {catalog.site.author_display_name} — Complete Overview
+
+> Extended companion document for AI systems. Contains structured project details, public presentations, and core philosophies.
+
+Site URL: {base_url}
+Public Contact: {catalog.site.email.address}
+FOSS Motto: REBEL against corporate greed. REVEL in Free and Open Source Software!
+
+---
+
+## Technical Summary
+Lyra Phasma is a software developer, cyberdeck builder, and FOSS advocate specializing in Python, FastAPI, Linux environments, and unconventional computing hardware. Notable achievements include winning the CodeKada hackathon with an offline-first cyberdeck build.
+
+---
+
+## Active Projects
+"""
+    for p in catalog.public_projects:
+        tags_str = ", ".join(p.tags) if p.tags else "None"
+        repo_str = f"Repository: {p.repo_url}" if p.repo_url else ""
+        llms_full += f"""
+### {p.title}
+- Slug: {p.slug}
+- Year: {p.year}
+- Tags: {tags_str}
+- Summary: {p.summary}
+- {repo_str}
+"""
+        if p.body:
+            llms_full += f"\n{p.body}\n"
+
+    llms_full += "\n---\n\n## Presentations & Talks\n"
+    for t in catalog.public_talks:
+        llms_full += f"""
+### {t.title}
+- Event: {t.event} ({t.date})
+- Description: {t.description}
+"""
+
+    llms_full += f"""
+---
+
+## Navigation & Contact
+- Home: {base_url}/
+- Resume: {base_url}/resume/
+- Contacts: {base_url}/contacts/
+- GitHub: https://github.com/whinee
+"""
+    return llms_full
+
+
+def generate_llms_files() -> None:
+    """Generate root-published /llms.txt and /llms-full.txt."""
+    catalog = load_all_content()
+    base_url = catalog.site.url.rstrip("/")
+
+    (DIST_DIR / "llms.txt").write_text(generate_llms_txt(catalog, base_url), encoding="utf-8")
+    print("  Generated dist/llms.txt")
+
+    (DIST_DIR / "llms-full.txt").write_text(generate_llms_full(catalog, base_url), encoding="utf-8")
+    print("  Generated dist/llms-full.txt")
+
+
+def _collect_content_routes(catalog: Any) -> list[tuple[str, str]]:
     routes: list[tuple[str, str]] = []
     if catalog.has_projects:
         routes.append(("/projects", "projects/index.html"))
@@ -41,7 +137,7 @@ def _collect_content_routes(catalog) -> list[tuple[str, str]]:
     return routes
 
 
-def _collect_writing_routes(catalog) -> list[tuple[str, str]]:
+def _collect_writing_routes(catalog: Any) -> list[tuple[str, str]]:
     routes: list[tuple[str, str]] = []
     if catalog.has_writing:
         routes.append(("/writing", "writing/index.html"))
@@ -157,6 +253,8 @@ def verify_dist() -> bool:
         DIST_DIR / "contacts" / "index.html",
         DIST_DIR / "sitemap.xml",
         DIST_DIR / "_redirects",
+        DIST_DIR / "llms.txt",
+        DIST_DIR / "llms-full.txt",
     ]
     for rf in required_files:
         if not rf.exists() or rf.stat().st_size == 0:
@@ -183,6 +281,7 @@ def main() -> int:
 
     generate_sitemap(routes)
     generate_redirects()
+    generate_llms_files()
 
     if not verify_dist():
         return 1

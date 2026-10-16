@@ -1,0 +1,172 @@
+/* resume.css - Screen and Print stylesheet for /resume and /cv */
+.resume-page {
+  padding: 3rem 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.resume-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border, #352a52);
+}
+
+.resume-headline {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--blurple-hi, #ad9bf0);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.resume-summary {
+  font-size: 1.05rem;
+  color: var(--text-dim, #c9b8e8);
+  line-height: 1.6;
+  max-width: 700px;
+}
+
+.resume-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.resume-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.resume-section {
+  background: var(--surface, #1a1329);
+  border: 2px solid var(--border, #352a52);
+  border-radius: var(--radius-lg, 16px);
+  padding: 1.75rem;
+  box-shadow: 3px 3px 0 var(--border, #352a52);
+}
+
+.section-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text, #fbf5ff);
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border, #352a52);
+  padding-bottom: 0.5rem;
+}
+
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-pill {
+  background: var(--raised, #241c38);
+  color: var(--lavender, #d3bbfb);
+  border: 1px solid var(--border, #352a52);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full, 9999px);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.resume-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.resume-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.item-title {
+  color: var(--text, #fbf5ff);
+  font-size: 1.05rem;
+}
+
+.item-year,
+.item-date {
+  color: var(--lavender, #d3bbfb);
+  font-size: 0.85rem;
+  font-family: var(--font-mono, monospace);
+}
+
+.item-detail {
+  color: var(--text-dim, #c9b8e8);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.resume-email-note {
+  background: var(--surface, #1a1329);
+  border: 2px dashed var(--blurple, #8f7ae6);
+  border-radius: var(--radius-md, 12px);
+  padding: 1.25rem;
+  margin-top: 1rem;
+}
+
+.note-text {
+  color: var(--lavender, #d3bbfb);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Print Stylesheet */
+@media print {
+  .no-print,
+  .site-nav-header,
+  .site-footer,
+  .skip-link {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt;
+  }
+
+  .resume-page {
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .resume-section {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0.5rem 0 !important;
+  }
+
+  .section-title {
+    color: #000000 !important;
+    border-bottom: 1px solid #cccccc !important;
+  }
+
+  .item-title,
+  .resume-headline,
+  .page-title {
+    color: #000000 !important;
+  }
+
+  .skill-pill {
+    background: #eeeeee !important;
+    color: #000000 !important;
+    border: 1px solid #cccccc !important;
+  }
+}

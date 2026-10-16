@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block styles %}
-    <link rel="stylesheet" href="/static/stylesheets/hero_a.css">
+    <link rel="stylesheet" href="/static/stylesheets/hero_{{ content.site.hero_variant | lower }}.css">
     <link rel="stylesheet" href="/static/stylesheets/slides.css">
     <link rel="stylesheet" href="/static/stylesheets/story.css">
     <link rel="stylesheet" href="/static/stylesheets/foss.css">
@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block content %}
-    {% include "sections/hero_a.html" %}
+    {% include "sections/hero_" + content.site.hero_variant | lower + ".html" %}
     <div class="section-divider" aria-hidden="true">
         <span class="divider-line"></span>
         <span class="divider-icon">✧</span>

@@ -187,6 +187,10 @@
   margin: 0;
   word-break: break-word;
   overflow-wrap: break-word;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
 }
 
 @media (min-width: 600px) {
@@ -198,14 +202,16 @@
 .hero-a .hero-name-highlight {
   color: var(--pink);
   text-shadow: 2px 2px 0 var(--raised);
+  display: inline;
+  vertical-align: baseline;
 }
 
 .hero-a .hero-title-kaomoji {
   display: inline-block;
   color: var(--hot-pink);
   font-size: 0.9em;
+  vertical-align: baseline;
   margin-left: var(--space-xs);
-  transform: rotate(-3deg);
   transition: transform var(--transition-fast);
 }
 

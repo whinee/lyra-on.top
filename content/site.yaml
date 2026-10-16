@@ -1,0 +1,34 @@
+author_display_name: Lyra Phasma
+availability: TODO(lyra)
+blog_signature_intro: Nyahallo! Your favorite kittygirl hacker here :3
+blog_signature_outro: 'Paws off the keyboard for now. I''m Lyra: your local kittygirl
+  hacker :3'
+description: 'Lyra Phasma''s portfolio: Software developer, cyberdeck builder, and
+  FOSS advocate! :3'
+email:
+  address: lyraphasma@gmail.com
+  obfuscate: true
+features:
+  cat_cursor: true
+  image_lock: true
+  lite_motion: true
+hero_variant: b
+nav:
+- projects
+- writing
+- blog
+- resume
+- contacts
+- talks
+socials:
+- kind: github
+  label: GitHub
+  url: https://github.com/whinee
+  visibility: public
+- handle: TODO(lyra)
+  kind: discord
+  label: Discord
+  visibility: public
+tagline: neko dev. weird hardware. FOSS or bust.
+title: Lyra Phasma | lyra-on.top
+url: https://lyra-on.top

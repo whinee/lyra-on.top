@@ -1,0 +1,156 @@
+/* writing.css - Styles for writing hub, poems, and song-analysis */
+.writing-page,
+.collection-page,
+.writing-detail-page {
+  padding: 3rem 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.breadcrumb {
+  margin-bottom: 2rem;
+}
+
+.breadcrumb a {
+  color: var(--blurple-hi, #ad9bf0);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.writing-collections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.collection-card {
+  background: var(--surface, #1a1329);
+  border: 2px solid var(--border, #352a52);
+  border-radius: var(--radius-lg, 16px);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 4px 0 var(--border, #352a52);
+}
+
+.collection-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.collection-title a {
+  color: var(--text, #fbf5ff);
+  text-decoration: none;
+}
+
+.collection-desc {
+  color: var(--text-dim, #c9b8e8);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+.collection-count {
+  font-size: 0.85rem;
+  color: var(--lavender, #d3bbfb);
+  font-family: var(--font-mono, monospace);
+  margin-bottom: 1.25rem;
+}
+
+.posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.post-summary-card {
+  background: var(--surface, #1a1329);
+  border: 2px solid var(--border, #352a52);
+  border-radius: var(--radius-md, 12px);
+  padding: 1.5rem;
+  box-shadow: 3px 3px 0 var(--border, #352a52);
+}
+
+.post-card-header {
+  margin-bottom: 0.5rem;
+}
+
+.post-date {
+  font-size: 0.85rem;
+  color: var(--lavender, #d3bbfb);
+  font-family: var(--font-mono, monospace);
+}
+
+.post-card-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-top: 0.25rem;
+}
+
+.post-card-title a {
+  color: var(--text, #fbf5ff);
+  text-decoration: none;
+}
+
+.post-card-title a:hover {
+  color: var(--blurple-hi, #ad9bf0);
+  text-decoration: underline;
+}
+
+.post-summary-text {
+  color: var(--text-dim, #c9b8e8);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.post-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border, #352a52);
+}
+
+.post-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--text, #fbf5ff);
+  margin-bottom: 0.75rem;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--lavender, #d3bbfb);
+  font-size: 0.9rem;
+}
+
+.post-tags-inline {
+  display: flex;
+  gap: 0.4rem;
+}
+
+/* Poem specific styling: preserved line breaks & whitespace */
+.poem-wrapper {
+  white-space: pre-wrap;
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--text, #fbf5ff);
+  padding: 2rem;
+  background: var(--surface, #1a1329);
+  border-left: 3px solid var(--blurple, #8f7ae6);
+  border-radius: var(--radius-md, 12px);
+  margin: 1.5rem 0;
+}
+
+.poem-wrapper p {
+  white-space: pre-wrap;
+  margin-bottom: 1.5rem;
+}

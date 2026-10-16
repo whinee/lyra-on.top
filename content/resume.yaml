@@ -1,0 +1,26 @@
+# content/resume.yaml - Resume & CV data
+headline: "Software developer, cyberdeck builder, and FOSS advocate! ✧"
+summary: "BSCS student, Pythonista, and open-source tinkerer building reliable systems and playful hardware."
+skills:
+  - "Python"
+  - "FastAPI"
+  - "Linux"
+  - "Git"
+achievements:
+  - title: "Winner - CodeKada: The Online Hackathon"
+    year: "TODO(lyra)"
+    detail: "Organized by DevKada"
+    visibility: "public"
+speaking:
+  - title: "Weird, Improvised Exciting Device (named WhiskerFrame), gets you noticed (a Cyberdeck story)"
+    event: "Hack & Yap Episode II"
+    date: "17 Oct 2026"
+    link: "https://lyra-on.top/#slides"
+    visibility: "public"
+education:
+  - degree: "BS in Computer Science (4th year)"
+    institution: "TODO(lyra)"
+    year: "2026"
+    visibility: "private"
+email_note: "if u want my personal CV with my dead/government name in it, just email me here, and ask for it. we can talk more there as well :3"
+cta: "Say Hello (=^･ω･^=)"

@@ -1,0 +1,137 @@
+/* blog.css - Styles for blog list, post details, signature blocks & code */
+.blog-page,
+.blog-detail-page {
+  padding: 3rem 1rem;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.blog-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.blog-post-card {
+  background: var(--surface, #1a1329);
+  border: 2px solid var(--border, #352a52);
+  border-radius: var(--radius-lg, 16px);
+  padding: 1.75rem;
+  box-shadow: 4px 4px 0 var(--border, #352a52);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.blog-post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 0 var(--blurple, #8f7ae6);
+}
+
+.blog-post-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border, #352a52);
+}
+
+.post-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  color: var(--lavender, #d3bbfb);
+  font-size: 0.9rem;
+  margin: 0.75rem 0 1rem 0;
+}
+
+.post-lead {
+  font-size: 1.15rem;
+  color: var(--lavender, #d3bbfb);
+  line-height: 1.6;
+}
+
+.post-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border, #352a52);
+}
+
+/* Signatures */
+.blog-signature-intro {
+  background: var(--surface, #1a1329);
+  border: 2px dashed var(--blurple, #8f7ae6);
+  border-radius: var(--radius-md, 12px);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0 2rem 0;
+  font-weight: 600;
+  color: var(--blurple-hi, #ad9bf0);
+  display: inline-block;
+}
+
+.blog-signature-outro {
+  background: var(--surface, #1a1329);
+  border-left: 4px solid var(--blurple, #8f7ae6);
+  border-radius: var(--radius-md, 12px);
+  padding: 1rem 1.25rem;
+  margin: 2.5rem 0 1.5rem 0;
+  font-weight: 600;
+  color: var(--lavender, #d3bbfb);
+}
+
+/* Markdown typography */
+.markdown-body {
+  color: var(--text, #fbf5ff);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.markdown-body p {
+  margin-bottom: 1.4rem;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3 {
+  color: var(--text, #fbf5ff);
+  margin-top: 2.2rem;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.markdown-body blockquote {
+  border-left: 4px solid var(--blurple, #8f7ae6);
+  background: var(--surface, #1a1329);
+  padding: 1rem 1.25rem;
+  border-radius: 0 var(--radius-sm, 6px) var(--radius-sm, 6px) 0;
+  margin: 1.5rem 0;
+  color: var(--lavender, #d3bbfb);
+}
+
+.markdown-body pre {
+  background: var(--bg, #120d1c);
+  border: 2px solid var(--border, #352a52);
+  border-radius: var(--radius-md, 12px);
+  padding: 1.25rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.markdown-body code {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.9em;
+}
+
+.markdown-body :not(pre) > code {
+  background: var(--raised, #241c38);
+  color: var(--lavender, #d3bbfb);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}

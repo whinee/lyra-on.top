@@ -34,6 +34,10 @@ todos-strict:
 qr:
     uv run python scripts/make_qr.py
 
+# Set hero variant (a|b|c)
+hero variant="a":
+    uv run python scripts/set_hero.py {{variant}}
+
 # Freeze static site to dist/
 freeze:
     uv run python scripts/freeze.py
@@ -45,6 +49,10 @@ preview port="8080": freeze
 # Capture 360px and 1280px screenshots of hero variants
 screenshots:
     uv run python scripts/screenshot_heroes.py
+
+# Run Lighthouse performance and SEO audits on frozen build
+lighthouse: freeze
+    uv run python scripts/run_lighthouse.py
 
 # Deploy static dist/ to Cloudflare Pages
 deploy: freeze

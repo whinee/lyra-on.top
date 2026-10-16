@@ -1,4 +1,4 @@
-/* stylesheets/whisker.css - WhiskerFrame mascot styling & 3 interactive states */
+/* stylesheets/whisker.css - WhiskerFrame mascot styling, random animation states & boss fight */
 
 .whisker-mascot-wrapper {
   position: relative;
@@ -113,37 +113,276 @@
   }
 }
 
-/* 3. Wiggle Interactive State */
+/* 3. Bounded Randomized Animation States */
 .whisker-mascot-wrapper:hover .whisker-body-group,
 .whisker-mascot-wrapper:focus-visible .whisker-body-group,
 .whisker-mascot-wrapper[data-state="wiggle"] .whisker-body-group {
   animation: whisker-wiggle 0.45s ease-in-out infinite alternate;
+  animation-delay: var(--anim-offset, 0s);
 }
 
 @keyframes whisker-wiggle {
-  0% {
-    transform: rotate(-3deg) scale(1.02);
-  }
-  100% {
-    transform: rotate(3deg) scale(1.02);
-  }
+  0% { transform: rotate(-3deg) scale(1.02); }
+  100% { transform: rotate(3deg) scale(1.02); }
+}
+
+.whisker-mascot-wrapper[data-state="bounce"] .whisker-body-group {
+  animation: whisker-bounce 0.38s ease-in-out infinite alternate;
+  animation-delay: var(--anim-offset, 0s);
+}
+
+@keyframes whisker-bounce {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-8px) scale(1.04); }
+}
+
+.whisker-mascot-wrapper[data-state="curious-tilt"] .whisker-body-group {
+  animation: whisker-tilt 0.5s ease-in-out infinite alternate;
+  animation-delay: var(--anim-offset, 0s);
+}
+
+@keyframes whisker-tilt {
+  0% { transform: rotate(-6deg) scale(1.03); }
+  100% { transform: rotate(4deg) scale(1.03); }
+}
+
+.whisker-mascot-wrapper[data-state="heart-pulse"] .whisker-body-group {
+  animation: whisker-pulse 0.4s ease-in-out infinite alternate;
+  animation-delay: var(--anim-offset, 0s);
+}
+
+@keyframes whisker-pulse {
+  0% { transform: scale(0.98); }
+  100% { transform: scale(1.08); }
 }
 
 .whisker-mascot-wrapper:active .whisker-body-group {
   transform: scale(0.96);
-  animation: none;
 }
 
-/* 4. A11y & Reduced-Motion Rules */
+/* 4. Progressive Boss Fight Arena */
+.whisker-boss-arena {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99990;
+  pointer-events: none;
+}
+
+.whisker-boss-arena.active {
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto;
+}
+
+.boss-overlay-backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(25, 26, 40, 0.92);
+  backdrop-filter: blur(8px);
+  z-index: 1;
+}
+
+.boss-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  padding: var(--space-md);
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.boss-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  align-items: center;
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+
+.boss-title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.boss-badge {
+  background-color: var(--hot-pink);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  padding: 3px var(--space-sm);
+  border-radius: var(--radius-pill);
+  box-shadow: 2px 2px 0 var(--bg);
+}
+
+.boss-status-text {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--baby-yellow);
+  text-shadow: 0 0 8px rgba(255, 243, 168, 0.4);
+}
+
+.boss-power-track {
+  width: 100%;
+  max-width: 600px;
+  height: 16px;
+  background-color: var(--surface);
+  border: 2px solid var(--pink);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(253, 125, 166, 0.3);
+}
+
+.boss-power-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pink), var(--hot-pink), #ff9f43, var(--baby-yellow));
+  transition: width 0.12s ease-out;
+  border-radius: var(--radius-pill);
+}
+
+.boss-controls {
+  margin-top: var(--space-2xs);
+}
+
+.boss-btn-exit {
+  font-size: var(--text-xs);
+  padding: 4px var(--space-md);
+}
+
+.boss-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  flex: 1;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .boss-grid {
+    grid-template-columns: 1.1fr 1fr 1.1fr;
+    gap: var(--space-lg);
+  }
+}
+
+.boss-terminal {
+  background-color: var(--bg);
+  border: 2px solid var(--raised);
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 20px rgba(41, 219, 255, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 280px;
+}
+
+.boss-term-bar {
+  background-color: var(--surface);
+  padding: var(--space-2xs) var(--space-sm);
+  border-bottom: 1.5px solid var(--raised);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--lavender);
+}
+
+.boss-term-body {
+  padding: var(--space-sm);
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  color: var(--cursor-cyan);
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-y: auto;
+  max-height: 240px;
+}
+
+.boss-center-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 220px;
+}
+
+.boss-aura {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 109, 214, 0.35) 0%, rgba(255, 159, 67, 0.15) 50%, transparent 70%);
+  pointer-events: none;
+  animation: boss-aura-pulse 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes boss-aura-pulse {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  100% { transform: scale(1.2); opacity: 1; }
+}
+
+.boss-victory-banner {
+  margin-top: var(--space-md);
+  background-color: var(--surface);
+  border: 3px solid var(--baby-yellow);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 25px rgba(255, 243, 168, 0.6);
+  text-align: center;
+  animation: boss-victory-bounce 0.6s ease-out;
+}
+
+.boss-victory-banner h3 {
+  color: var(--baby-yellow);
+  margin: 0 0 var(--space-2xs) 0;
+  font-size: var(--text-base);
+}
+
+.boss-victory-banner p {
+  color: var(--pink);
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+@keyframes boss-victory-bounce {
+  0% { transform: scale(0.8); opacity: 0; }
+  60% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* Page Rumble Effect during high power */
+body.boss-active-shake {
+  animation: boss-screen-rumble 0.22s ease-in-out infinite alternate;
+}
+
+@keyframes boss-screen-rumble {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  50% { transform: translate(-1px, -1px) rotate(0.1deg); }
+  100% { transform: translate(1px, -1px) rotate(-0.1deg); }
+}
+
+/* 5. A11y & Reduced-Motion Rules */
 @media (prefers-reduced-motion: reduce) {
   .whisker-body-group,
   .eye-open,
-  .eye-cursor {
+  .eye-cursor,
+  .boss-aura,
+  body.boss-active-shake {
     animation: none !important;
+    transform: none !important;
   }
   .whisker-mascot-wrapper:hover .whisker-body-group,
   .whisker-mascot-wrapper:focus-visible .whisker-body-group,
-  .whisker-mascot-wrapper[data-state="wiggle"] .whisker-body-group {
+  .whisker-mascot-wrapper[data-state] .whisker-body-group {
     transform: none !important;
   }
   .whisker-speech-bubble {

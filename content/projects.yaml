@@ -1,0 +1,27 @@
+# content/projects.yaml - Projects list
+projects:
+  - slug: "lyra-on-top"
+    title: "lyra-on.top"
+    summary: "Personal site and long-term internet home. Built with FastAPI + chaos :3"
+    repo_url: "https://github.com/whinee/lyra-on.top"
+    tags: ["python", "fastapi", "html", "css"]
+    language: "Python"
+    status: "active"
+    featured: true
+    year: "2026"
+    highlights:
+      - "Zero-dependency static export pipeline"
+      - "Full WCAG 2.1 AA pastel color system"
+    visibility: "public"
+  - slug: "whiskerframe"
+    title: "WhiskerFrame Cyberdeck"
+    summary: "Custom portable cyberdeck running in full blurple and pastel glory! ✧"
+    repo_url: "https://github.com/whinee/whiskerframe"
+    tags: ["hardware", "cyberdeck", "linux"]
+    language: "Python"
+    status: "active"
+    featured: true
+    year: "2026"
+    highlights:
+      - "Weird computing hardware built to stand out"
+    visibility: "public"

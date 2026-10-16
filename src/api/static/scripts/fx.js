@@ -11,6 +11,11 @@
   // Progressive enhancement: mark HTML as js-enhanced
   document.documentElement.classList.add("js-enhanced");
 
+  // Prevent native drag-and-drop ghosting while keeping text selection and copy working
+  document.addEventListener("dragstart", (e) => {
+    e.preventDefault();
+  });
+
   // 1. Scroll-Pop Reveal Observer
   if (!prefersReducedMotion && "IntersectionObserver" in window) {
     const observer = new IntersectionObserver(
@@ -24,8 +29,8 @@
       },
       {
         threshold: 0.12,
-        rootMargin: "0px 0px -40px 0px"
-      }
+        rootMargin: "0px 0px -40px 0px",
+      },
     );
 
     document.querySelectorAll(".card, .foss-banner-card, .win-card").forEach((el) => {
@@ -34,28 +39,47 @@
     });
   }
 
-  // 2. Click Floater Accents (Sparkles & Hearts)
+  // 2. Global Delegated Click Feedback
   if (!prefersReducedMotion) {
-    const ICONS = ["✧", "♡", "★", "✦", ":3"];
+    const REACTIONS = ["✧", "♡", ":3", "nya~", "✦", "★", "uwu", "purr~", "paws!"];
+    const COLORS = [
+      "var(--hot-pink)",
+      "var(--baby-yellow)",
+      "var(--cursor-cyan)",
+      "var(--pink)",
+      "var(--lavender)",
+    ];
 
     document.addEventListener("click", (e) => {
-      // Only trigger on interactive clicks (buttons, stickers, links)
-      const target = e.target.closest(".btn, .sticker, .win-card, a");
-      if (!target) return;
+      // Do not trigger if user is selecting text
+      const selection = window.getSelection();
+      if (selection && selection.toString().trim().length > 0) {
+        return;
+      }
+
+      // Do not trigger inside text inputs or editable fields
+      if (e.target && e.target.closest("input, textarea, select, [contenteditable='true']")) {
+        return;
+      }
 
       const floater = document.createElement("span");
       floater.className = "fx-floater";
-      floater.textContent = ICONS[Math.floor(Math.random() * ICONS.length)];
-      floater.style.left = `${e.clientX - 10}px`;
-      floater.style.top = `${e.clientY - 10}px`;
-      floater.style.color = Math.random() > 0.5 ? "var(--hot-pink)" : "var(--baby-yellow)";
-      floater.style.fontSize = `${14 + Math.floor(Math.random() * 10)}px`;
+      floater.textContent = REACTIONS[Math.floor(Math.random() * REACTIONS.length)];
+      floater.style.left = `${e.clientX}px`;
+      floater.style.top = `${e.clientY}px`;
+      floater.style.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+      floater.style.fontSize = `${22 + Math.floor(Math.random() * 8)}px`;
 
       document.body.appendChild(floater);
 
-      floater.addEventListener("animationend", () => {
-        floater.remove();
-      });
+      const cleanup = () => {
+        if (floater.parentNode) {
+          floater.remove();
+        }
+      };
+
+      floater.addEventListener("animationend", cleanup, { once: true });
+      setTimeout(cleanup, 1000); // Safety timeout
     });
   }
 })();
