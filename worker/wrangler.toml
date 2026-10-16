@@ -1,0 +1,8 @@
+name = "lyra-api"
+main = "main.py"
+compatibility_date = "2026-10-12"
+compatibility_flags = ["python_workers"]
+
+[routes]
+route = "api.lyra-on.top/*"
+zone_name = "lyra-on.top"

@@ -1,7 +1,7 @@
 {
   "homepage": {
     "mobile": {
-      "performance": 95,
+      "performance": 96,
       "accessibility": 96,
       "best-practices": 100,
       "seo": 100
@@ -29,7 +29,7 @@
   },
   "resume": {
     "mobile": {
-      "performance": 94,
+      "performance": 98,
       "accessibility": 95,
       "best-practices": 100,
       "seo": 100
@@ -43,7 +43,7 @@
   },
   "contacts": {
     "mobile": {
-      "performance": 94,
+      "performance": 98,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
